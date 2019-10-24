@@ -16,8 +16,16 @@ const LoginForm = ({errorText, onClickLogin}) => {
     return <div style={{display: 'flex', flexDirection: 'column'}}>
         <div>
             <Row type="flex" justify="center">
+                <img alt="logo" src={`${process.env.PUBLIC_URL}logo.png`}
+                     style={{
+                         marginLeft: '-50px',
+                         marginTop: '50px'
+                     }}
+                />
+            </Row>
+            <Row type="flex" justify="center">
                 <Col span={6} className="center">
-                    {/*<img alt="logo" src={`${process.env.PUBLIC_URL}logo.png`}/>*/}
+
                     <Card style={{
                         borderRadius: '10px'
                     }}>
@@ -52,7 +60,7 @@ const LoginForm = ({errorText, onClickLogin}) => {
                             placeholder="Password"
                         />
 
-                        <LoginButtons onClickLogin={login} />
+                        <LoginButtons onClickLogin={login}/>
 
                         <div style={{
                             textAlign: 'center',

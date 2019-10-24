@@ -8,22 +8,16 @@ export const setErrorText = (value) => {
     }
 };
 
-function setUsername(username) {
-    return {
-        type: ActionConstant.SET_USERNAME,
-        username
-    }
-}
-
 function callApiStart() {
     return {
         type: ActionConstant.CALL_API_START
     };
 }
 
-function loginSuccess() {
+function loginSuccess(username) {
     return {
-        type: ActionConstant.LOGIN_SUCCESS
+        type: ActionConstant.LOGIN_SUCCESS,
+        username
     };
 }
 
@@ -62,7 +56,7 @@ export const getUsername = () => {
             .then(data => data.data)
             .then(data => {
                 if (data.returnCode === 1) {
-                    dispatch(setUsername(data.message));
+                    dispatch(loginSuccess(data.message));
                 } else {
                     dispatch(setErrorText(data.message));
                 }
@@ -93,7 +87,7 @@ export const login = (username, password) => {
             .then(data => {
                 if (data.returnCode === 1) {
                     localStorage.setItem("token", data.token);
-                    dispatch(loginSuccess());
+                    dispatch(getUsername());
                 } else {
                     dispatch(setErrorText(data.message));
                 }

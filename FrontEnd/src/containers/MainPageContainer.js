@@ -15,8 +15,10 @@ function MainPageContainer(props) {
         props.logout();
         history.push("/login");
     }
-    if (props.errorText == null || props.errorText === '')
+
+    if (props.username == null){
         props.getUsername();
+    }
 
     return <MainPage errorText={props.errorText}
                      username={props.username}

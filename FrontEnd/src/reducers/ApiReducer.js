@@ -33,6 +33,7 @@ export default function apiReducer(state = initialState, action){
         case ActionConstant.LOGIN_SUCCESS:
             return {
                 ...state,
+                username: action.username,
                 isLoading : false,
                 errorText: '',
                 loggedIn: true
