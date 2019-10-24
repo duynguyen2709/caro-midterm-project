@@ -43,7 +43,7 @@ export const register = (username, password, retypePassword) => {
         }).then(data => data.data)
             .then(data => {
                 dispatch(setErrorText(data.message));
-        }).catch(err => dispatch(setErrorText(err)));
+        }).catch(err => dispatch(setErrorText(err.message)));
     }
 };
 
@@ -65,7 +65,7 @@ export const getUsername = () => {
                 } else {
                     dispatch(setErrorText(data.message));
                 }
-            }).catch(err => dispatch(setErrorText(err)));
+            }).catch(err => dispatch(setErrorText(err.message)));
     }
 };
 
@@ -75,7 +75,6 @@ export function logout () {
         type: ActionConstant.LOGOUT
     }
 }
-
 
 export const login = (username, password) => {
     return (dispatch, getState) => {
@@ -95,6 +94,6 @@ export const login = (username, password) => {
                 } else {
                     dispatch(setErrorText(data.message));
                 }
-            }).catch(err => dispatch(setErrorText(err)));
+            }).catch(err =>  dispatch(setErrorText(err.message)));
     };
 };

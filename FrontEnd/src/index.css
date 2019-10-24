@@ -122,3 +122,8 @@ ol, ul {
   left: 50%;
   transform: translate3d(-50%,0%, 0);
 }
+
+.social-login-button {
+  margin-top: 7px;
+  font-weight: bold;
+}
