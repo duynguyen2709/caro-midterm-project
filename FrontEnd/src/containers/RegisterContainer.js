@@ -2,10 +2,29 @@ import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
 import React from 'react';
 import RegisterForm from '../components/RegisterForm';
-import {register} from "../actions/ApiActions";
+import {register, setErrorText} from "../actions/ApiActions";
 
 function RegisterContainer(props)  {
-    return <RegisterForm errorText={props.errorText} onClickRegister={props.register}/>
+
+    function validateInfo(user){
+        const {username, password, retypePassword, email, fullName} = user;
+
+        if (username === '' || password === '' ||
+            email === '' || fullName === ''){
+            props.setErrorText('Thông tin không được rỗng. Vui lòng nhập lại');
+            return;
+        }
+
+        if (password !== retypePassword) {
+            props.setErrorText('Mật khẩu không khớp. Vui lòng nhập lại');
+            return;
+        }
+
+        props.register(user);
+
+    }
+
+    return <RegisterForm errorText={props.errorText} onClickRegister={validateInfo}/>
 }
 
 function mapStateToProps(state) {
@@ -16,7 +35,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        register: (username, password, retypePassword) => dispatch(register(username, password, retypePassword)),
+        setErrorText: (err) => dispatch(setErrorText(err)),
+        register: (user) => dispatch(register(user)),
     };
 }
 

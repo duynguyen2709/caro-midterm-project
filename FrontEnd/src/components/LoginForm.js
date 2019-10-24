@@ -1,18 +1,26 @@
-import {Button, Col, Icon, Input, Row} from 'antd';
+import {Card, Col, Icon, Input, Row} from 'antd';
 import React, {useState} from 'react';
 import 'antd/dist/antd.css';
 import '../index.css';
+import LoginButtons from "./LoginButtons";
 
 const LoginForm = ({errorText, onClickLogin}) => {
 
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
+    function login() {
+        onClickLogin(username, password);
+    }
+
     return <div style={{display: 'flex', flexDirection: 'column'}}>
         <div>
-            <Row type="flex" justify="center" align="top">
+            <Row type="flex" justify="center">
                 <Col span={6} className="center">
-                    <div>
+                    {/*<img alt="logo" src={`${process.env.PUBLIC_URL}logo.png`}/>*/}
+                    <Card style={{
+                        borderRadius: '10px'
+                    }}>
                         <h1 style={{
                             textAlign: 'center',
                             color: '#464646'
@@ -43,49 +51,16 @@ const LoginForm = ({errorText, onClickLogin}) => {
                             type="password"
                             placeholder="Password"
                         />
-                        <div style={{display: 'flex', flexDirection: 'column'}}>
-                            <Button
-                                type="primary"
-                                htmlType="submit"
-                                className="horizontal-center social-login-button"
-                                onClick={() => onClickLogin(username, password)}
-                                block={false}>
-                                Đăng Nhập
-                            </Button>
 
-                            <Button
-                                type="primary"
-                                className="horizontal-center social-login-button"
-                                onClick={() => onClickLogin(username, password)}
-                                style={{
-                                    background: '#4267B2',
-                                    borderColor: '#4267B2'
-                                }}
-                            >
-                                <Icon type="facebook" theme="filled" style={{fontSize: '20px'}}/>
-                                Đăng Nhập Bằng Facebook
-                            </Button>
-
-                            <Button
-                                type="primary"
-                                className="horizontal-center social-login-button"
-                                onClick={() => onClickLogin(username, password)}
-                                style={{
-                                    background: '#d34836',
-                                    borderColor: '#d34836'
-                                }}>
-                                <Icon type="google-circle" theme="filled" style={{fontSize: '20px'}} />
-                                Đăng Nhập Bằng Google
-                            </Button>
-                        </div>
+                        <LoginButtons onClickLogin={login} />
 
                         <div style={{
                             textAlign: 'center',
                             marginTop: '10px'
                         }}>
-                            <a href="/register" style={{fontWeight:'bold'}}>Đăng Ký Tài Khoản</a>
+                            <a href="/register" style={{fontWeight: 'bold'}}>Đăng Ký Tài Khoản</a>
                         </div>
-                    </div>
+                    </Card>
                 </Col>
             </Row>
         </div>

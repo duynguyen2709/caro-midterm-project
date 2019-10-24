@@ -7,6 +7,10 @@ module.exports.getUser = async (username) => {
         .then(([rows, fields]) => {
             return [rows, fields];
         })
+        .catch(err => {
+            console.error(err.message);
+            return [null, null];
+        });
 
     if (!res[0])
         return null;
@@ -17,15 +21,19 @@ module.exports.getUser = async (username) => {
     };
 };
 
-module.exports.createUser = async (username, password) => {
-    var hash = bcrypt.hashSync(password, 8);
+module.exports.createUser = async (user) => {
+    const hash = bcrypt.hashSync(user.password, 8);
     const [res, f] = await conn.getConnection()
         .query('INSERT INTO User SET ?', {
-            username: username,
-            password: hash
-        })
-        .then(([rows, fields]) => {
+            username: user.username,
+            password: hash,
+            email: user.email,
+            fullName: user.fullName
+        }).then(([rows, fields]) => {
             return [rows, fields];
+        }).catch((err) => {
+            console.error(err.message);
+            return [null, null];
         });
 
     return res;

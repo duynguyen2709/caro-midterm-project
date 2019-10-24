@@ -48,7 +48,7 @@ ol, ul {
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   margin-left: 100px;
 }
 
@@ -124,6 +124,6 @@ ol, ul {
 }
 
 .social-login-button {
-  margin-top: 7px;
+  margin-top: 10px;
   font-weight: bold;
 }

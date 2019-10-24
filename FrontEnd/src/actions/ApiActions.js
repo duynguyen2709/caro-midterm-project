@@ -1,12 +1,12 @@
 import axios from 'axios';
 import {ActionConstant} from "../utils/Constants";
 
-function setErrorText(value) {
+export const setErrorText = (value) => {
     return {
         type: ActionConstant.SET_ERROR,
         value
     }
-}
+};
 
 function setUsername(username) {
     return {
@@ -27,23 +27,21 @@ function loginSuccess() {
     };
 }
 
-export const register = (username, password, retypePassword) => {
+export const register = (user) => {
     return (dispatch, getState) => {
-        if (password !== retypePassword)
-            return dispatch(setErrorText('Mật khẩu không khớp. Vui lòng nhập lại'));
-
         if (getState().api.isLoading)
             return null;
 
         dispatch(callApiStart());
 
         return axios.post(`${process.env.REACT_APP_BACKEND_URL}user/register`, {
-            username,
-            password
+            user
+        }, {
+            timeout: 5000
         }).then(data => data.data)
             .then(data => {
                 dispatch(setErrorText(data.message));
-        }).catch(err => dispatch(setErrorText(err.message)));
+            }).catch(() => dispatch(setErrorText('Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau')));
     }
 };
 
@@ -57,7 +55,10 @@ export const getUsername = () => {
         dispatch(callApiStart());
 
         return axios.get(`${process.env.REACT_APP_BACKEND_URL}me`,
-            { headers: {"Authorization" : `Bearer ${token}`} })
+            {
+                headers: {"Authorization": `Bearer ${token}`},
+                timeout: 5000
+            })
             .then(data => data.data)
             .then(data => {
                 if (data.returnCode === 1) {
@@ -65,11 +66,11 @@ export const getUsername = () => {
                 } else {
                     dispatch(setErrorText(data.message));
                 }
-            }).catch(err => dispatch(setErrorText(err.message)));
+            }).catch(() => dispatch(setErrorText('Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau')));
     }
 };
 
-export function logout () {
+export function logout() {
     localStorage.removeItem("token");
     return {
         type: ActionConstant.LOGOUT
@@ -86,14 +87,16 @@ export const login = (username, password) => {
         return axios.post(`${process.env.REACT_APP_BACKEND_URL}user/login`, {
             username,
             password
+        }, {
+            timeout: 5000
         }).then(data => data.data)
             .then(data => {
                 if (data.returnCode === 1) {
-                    localStorage.setItem("token",data.token);
+                    localStorage.setItem("token", data.token);
                     dispatch(loginSuccess());
                 } else {
                     dispatch(setErrorText(data.message));
                 }
-            }).catch(err =>  dispatch(setErrorText(err.message)));
+            }).catch(() => dispatch(setErrorText('Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau')));
     };
 };
