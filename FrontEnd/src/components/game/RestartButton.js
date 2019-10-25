@@ -1,5 +1,5 @@
 import React from 'react';
-import '../index.css';
+import '../../index.css';
 
 const RestartButton = React.memo(({onClick}) => {
   return <div className="restart-button">

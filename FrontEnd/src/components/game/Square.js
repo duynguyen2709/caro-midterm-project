@@ -1,5 +1,5 @@
 import React from 'react';
-import '../index.css';
+import '../../index.css';
 
 const Square = React.memo(({ id, value, onClick }) => {
   const textColor = value === 'X' ? 'blue' : 'red';

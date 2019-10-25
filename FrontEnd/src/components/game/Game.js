@@ -1,9 +1,9 @@
 import {Button} from "antd";
 import React from 'react';
-import '../index.css';
+import '../../index.css';
 import RestartButton from './RestartButton';
-import { isBoardFull, resetColor } from '../utils/GameCheckUtil';
-import MoveHistoryContainer from '../containers/MoveHistoryContainer';
+import { isBoardFull, resetColor } from '../../utils/GameCheckUtil';
+import MoveHistoryContainer from '../../containers/game/MoveHistoryContainer';
 import Board from './Board';
 
 class Game extends React.Component {

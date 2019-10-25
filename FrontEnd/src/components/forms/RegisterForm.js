@@ -1,7 +1,7 @@
 import {Button, Card, Col, Icon, Input, Row} from 'antd';
 import React, {useState} from 'react';
 import 'antd/dist/antd.css';
-import '../index.css';
+import '../../index.css';
 
 const RegisterForm = ({errorText, onClickRegister}) => {
 
@@ -32,9 +32,7 @@ const RegisterForm = ({errorText, onClickRegister}) => {
                         ĐĂNG KÝ TÀI KHOẢN
                     </h1>
 
-                    {errorText != null && errorText.toString() !== '' ?
-                        <p style={{textAlign: 'center', color: 'red'}}>{errorText}</p>
-                        : null}
+                    <p style={{textAlign: 'center', color: 'red'}}>{errorText}</p>
 
                     <Input
                         style={{marginBottom: 12}}

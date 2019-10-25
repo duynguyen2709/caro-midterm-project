@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { resetTable, setCurrentSelected } from '../actions/RootActions';
-import MoveHistory from '../components/MoveHistory';
+import { resetTable, setCurrentSelected } from '../../actions/RootActions';
+import MoveHistory from '../../components/game/MoveHistory';
 
 function mapStateToProps(state) {
   return {

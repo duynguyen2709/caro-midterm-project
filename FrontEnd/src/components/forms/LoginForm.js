@@ -1,7 +1,7 @@
 import {Card, Col, Icon, Input, Row} from 'antd';
 import React, {useState} from 'react';
 import 'antd/dist/antd.css';
-import '../index.css';
+import '../../index.css';
 import LoginButtons from "./LoginButtons";
 
 const LoginForm = ({errorText, onClickLogin}) => {
@@ -36,9 +36,7 @@ const LoginForm = ({errorText, onClickLogin}) => {
                             ĐĂNG NHẬP
                         </h1>
 
-                        {errorText != null && errorText.toString() !== '' ?
-                            <p style={{textAlign: 'center', color: 'red'}}>{errorText}</p>
-                            : null}
+                        <p style={{textAlign: 'center', color: 'red'}}>{errorText}</p>
 
                         <Input
                             style={{marginBottom: 12}}

@@ -1,8 +1,8 @@
 import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
 import React from 'react';
-import RegisterForm from '../components/RegisterForm';
-import {register, setErrorText} from "../actions/ApiActions";
+import RegisterForm from '../../components/forms/RegisterForm';
+import {register, setErrorText} from "../../actions/ApiActions";
 
 function RegisterContainer(props)  {
 

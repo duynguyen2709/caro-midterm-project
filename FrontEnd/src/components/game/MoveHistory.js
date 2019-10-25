@@ -1,7 +1,7 @@
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import React, {useMemo} from 'react';
-import '../index.css';
+import '../../index.css';
 
 const NoDataComponent = (props) => {
   return props.children === '' ?

@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import {initBoard, resetBoard, setCurrentSelected, onClickSquare} from '../actions/RootActions';
-import Game from '../components/Game';
+import {initBoard, resetBoard, setCurrentSelected, onClickSquare} from '../../actions/RootActions';
+import Game from '../../components/game/Game';
 
 function mapStateToProps(state) {
   return {

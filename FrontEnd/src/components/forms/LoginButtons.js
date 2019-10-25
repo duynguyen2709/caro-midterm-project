@@ -1,7 +1,7 @@
 import {Button, Icon} from "antd";
 import React from 'react';
 import 'antd/dist/antd.css';
-import '../index.css';
+import '../../index.css';
 
 const LoginButtons = ({onClickLogin}) => {
   return (<div style={{display: 'flex', flexDirection: 'column'}}>

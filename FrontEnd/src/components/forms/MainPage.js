@@ -2,8 +2,8 @@ import {Button, Col, Row} from 'antd';
 import * as React from 'react';
 import {useHistory} from 'react-router-dom';
 import 'antd/dist/antd.css';
-import '../index.css';
-import Error from "./Error";
+import '../../index.css';
+import Error from "../utils/Error";
 
 const MainPage = ({errorText, username, onClickLogout}) => {
     const history = useHistory();

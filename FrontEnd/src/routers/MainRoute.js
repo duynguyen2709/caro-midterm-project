@@ -1,9 +1,9 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import LoginContainer from "../containers/LoginContainer";
-import RegisterContainer from "../containers/RegisterContainer";
-import GameContainer from "../containers/GameContainer";
-import MainPageContainer from "../containers/MainPageContainer";
+import LoginContainer from "../containers/forms/LoginContainer";
+import RegisterContainer from "../containers/forms/RegisterContainer";
+import GameContainer from "../containers/game/GameContainer";
+import MainPageContainer from "../containers/forms/MainPageContainer";
 
 export default function MainRoute() {
     return (<BrowserRouter>

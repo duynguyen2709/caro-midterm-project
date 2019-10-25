@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, useHistory, withRouter} from 'react-router-dom'
-import MainPage from "../components/MainPage";
-import {getUsername, logout} from "../actions/ApiActions";
+import MainPage from "../../components/forms/MainPage";
+import {getUsername, logout} from "../../actions/ApiActions";
 
 function MainPageContainer(props) {
     const token = localStorage.getItem("token");
