@@ -52,6 +52,7 @@ function onClickSquare(state, payload) {
   const currentSymbol = copyState.isXNext ? 'X' : 'O';
 
   const elementClicked = {
+    key: copyState.totalChecked + 1,
     id: copyState.totalChecked + 1,
     symbol: currentSymbol,
     row: payload.i + 1,

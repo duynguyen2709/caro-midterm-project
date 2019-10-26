@@ -5,7 +5,7 @@ function highlight(arr, currentSymbol){
     if (currentSymbol === "X")
         color = "#fd4138";
     else
-        color = "#ff8d00";
+        color = "#000000";
 
     for (let i=0; i< arr.length; i++){
         const key = `${arr[i].row}_${arr[i].col}`;

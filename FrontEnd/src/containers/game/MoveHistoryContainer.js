@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { resetTable, setCurrentSelected } from '../../actions/RootActions';
-import MoveHistory from '../../components/game/MoveHistory';
+import MoveHistoryTable from '../../components/game/MoveHistoryTable';
 
 function mapStateToProps(state) {
   return {
@@ -16,4 +16,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoveHistory);
+export default connect(mapStateToProps, mapDispatchToProps)(MoveHistoryTable);
