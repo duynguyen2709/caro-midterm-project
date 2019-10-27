@@ -22,6 +22,8 @@ function resetColor(){
 
 function checkWinCondition(squares, i, j) {
 
+    console.log(i,'',j);
+    console.table(squares);
     const currentSymbol = squares[i][j];
 
     function checkRow() {

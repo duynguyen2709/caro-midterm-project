@@ -12,6 +12,9 @@ export default class MoveHistoryTable extends React.Component {
     // eslint-disable-next-line no-unused-vars
     componentDidUpdate(prevProps, prevState, snapshot) {
         const rows = document.getElementsByClassName('ant-table-row');
+        if (rows == null || rows.length === 0)
+            return;
+
         if (rows.length >= 9) {
             rows[rows.length - 1].scrollIntoView(({
                 behavior: "smooth",
@@ -61,6 +64,7 @@ export default class MoveHistoryTable extends React.Component {
             },
             {
                 title: 'Reset',
+                // eslint-disable-next-line no-unused-vars
                 render: (text, record, index) => {
                     return <Button type="primary"
                                    shape="circle"
@@ -68,7 +72,7 @@ export default class MoveHistoryTable extends React.Component {
                                    style={{
                                        fontSize: '17px'
                                    }}
-                                   onClick={() => this.props.resetTable(index)}
+                                   onClick={() => this.props.resetTable(record)}
                     >
                         {'\u21BB'}
                     </Button>;

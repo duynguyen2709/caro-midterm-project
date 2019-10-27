@@ -19,10 +19,12 @@ function resetBoard() {
   }
 }
 
-function resetTable(index) {
+function resetTable(record) {
   return {
     type: ActionConstant.RESET_TABLE,
-    index,
+    index: record.id - 1,
+    i: record.row - 1,
+    j: record.column - 1
   }
 }
 

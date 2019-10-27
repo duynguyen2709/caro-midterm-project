@@ -48,6 +48,20 @@ class Game extends React.Component {
             return;
         }
         this.props.onClickSquare(i, j);
+
+        setTimeout(() => {
+            if (!this.props.win) {
+                let randI = Math.floor(Math.random() * 20);
+                let randJ = Math.floor(Math.random() * 20);
+
+                while (this.props.squares[randI][randJ] != null) {
+                    randI = Math.floor(Math.random() * 20);
+                    randJ = Math.floor(Math.random() * 20);
+                }
+                this.props.onClickSquare(randI, randJ);
+            }
+        }, 100);
+
     }
 
     render() {

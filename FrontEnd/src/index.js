@@ -17,6 +17,11 @@ const reducers = combineReducers({
     api: apiReducer
 });
 
+if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line global-require
+    const whyDidYouRender = require('@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js');
+    whyDidYouRender(React);
+}
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(<Provider store={store}>
