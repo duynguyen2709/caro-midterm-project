@@ -94,3 +94,23 @@ export const login = (username, password) => {
             }).catch(() => dispatch(setErrorText('Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau')));
     };
 };
+
+export const loginWithFacebook = () => {
+    return (dispatch, getState) => {
+        if (getState().api.isLoading)
+            return null;
+
+        dispatch(callApiStart());
+
+        window.open(`${process.env.REACT_APP_BACKEND_URL}auth/facebook`, "mywindow", "location=1,status=1,scrollbars=1, width=800,height=800");
+        window.addEventListener('message', (message) => {
+            const {data} = message;
+            if (data.returnCode === 1) {
+                localStorage.setItem("token", data.token);
+                return dispatch(getUsername());
+            } else {
+                return dispatch(setErrorText(data.message));
+            }
+        });
+    };
+};

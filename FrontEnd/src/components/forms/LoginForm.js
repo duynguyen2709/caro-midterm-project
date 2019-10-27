@@ -4,14 +4,10 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import LoginButtons from "./LoginButtons";
 
-const LoginForm = ({errorText, onClickLogin}) => {
+const LoginForm = ({errorText, onClickLogin, onClickLoginFacebook}) => {
 
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-
-    function login() {
-        onClickLogin(username, password);
-    }
 
     return <div style={{display: 'flex', flexDirection: 'column'}}>
         <div>
@@ -58,7 +54,8 @@ const LoginForm = ({errorText, onClickLogin}) => {
                             placeholder="Password"
                         />
 
-                        <LoginButtons onClickLogin={login}/>
+                        <LoginButtons onClickLogin={() => onClickLogin(username,password)}
+                                      onClickLoginFacebook={onClickLoginFacebook}/>
 
                         <div style={{
                             textAlign: 'center',

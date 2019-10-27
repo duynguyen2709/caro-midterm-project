@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const userRouter = require('./routes/UserRoute');
 const cors = require("cors");
+const passport = require('passport');
 require('./authentication/passport');
 const app = express();
 
@@ -28,7 +29,7 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(passport.initialize());
 app.use('/', userRouter);
 
 // catch 404 and forward to error handler

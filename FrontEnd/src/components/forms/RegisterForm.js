@@ -62,7 +62,6 @@ const RegisterForm = ({errorText, onClickRegister}) => {
                         onChange={(e) => setRetypePassword(e.target.value)}
                         placeholder="Nhập Lại Mật Khẩu"
                     />
-
                     <Input
                         style={{marginBottom: 12}}
                         prefix={<Icon type="mail" style={{color: 'rgba(0,0,0,.25)'}}/>}
@@ -72,7 +71,6 @@ const RegisterForm = ({errorText, onClickRegister}) => {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Email"
                     />
-
                     <Input
                         style={{marginBottom: 12}}
                         prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
@@ -82,7 +80,6 @@ const RegisterForm = ({errorText, onClickRegister}) => {
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="Họ tên"
                     />
-
                     <Button
                         type="primary"
                         htmlType="submit"

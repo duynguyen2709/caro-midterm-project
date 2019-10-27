@@ -16,7 +16,8 @@ module.exports.initConnection = async () => {
         host: "167.179.80.90",
         user: "1612145",
         password: "1612145",
-        database: "AdvancedWebDevelopment"
+        database: "AdvancedWebDevelopment",
+        charset: "utf8_general_ci"
     });
 };
 

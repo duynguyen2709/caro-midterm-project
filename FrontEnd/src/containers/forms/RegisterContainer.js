@@ -21,7 +21,6 @@ function RegisterContainer(props)  {
         }
 
         props.register(user);
-
     }
 
     return <RegisterForm errorText={props.errorText} onClickRegister={validateInfo}/>

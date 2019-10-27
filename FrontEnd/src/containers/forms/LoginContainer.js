@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom'
 import LoginPage from "../../components/forms/LoginForm";
-import {login} from "../../actions/ApiActions";
+import {login, loginWithFacebook} from "../../actions/ApiActions";
 
 function LoginContainer(props) {
     const token = localStorage.getItem("token");
@@ -10,7 +10,10 @@ function LoginContainer(props) {
     if ((token != null && token !== '') || props.loggedIn)
         return <Redirect to="/" />;
 
-    return <LoginPage errorText={props.errorText} onClickLogin={props.login}/>;
+    return <LoginPage errorText={props.errorText}
+                      onClickLogin={props.login}
+                      onClickLoginFacebook={props.loginWithFacebook}
+    />;
 }
 
 function mapStateToProps(state) {
@@ -23,6 +26,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         login: (username, password) => dispatch(login(username, password)),
+        loginWithFacebook: () => dispatch(loginWithFacebook()),
     };
 }
 
