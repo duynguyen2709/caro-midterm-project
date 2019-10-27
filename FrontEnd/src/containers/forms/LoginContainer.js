@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom'
 import LoginPage from "../../components/forms/LoginForm";
-import {login, loginWithFacebook} from "../../actions/ApiActions";
+import {login, loginWithFacebook, loginWithGoogle} from "../../actions/ApiActions";
 
 function LoginContainer(props) {
     const token = localStorage.getItem("token");
@@ -13,6 +13,7 @@ function LoginContainer(props) {
     return <LoginPage errorText={props.errorText}
                       onClickLogin={props.login}
                       onClickLoginFacebook={props.loginWithFacebook}
+                      onClickLoginGoogle={props.loginWithGoogle}
     />;
 }
 
@@ -27,6 +28,7 @@ function mapDispatchToProps(dispatch) {
     return {
         login: (username, password) => dispatch(login(username, password)),
         loginWithFacebook: () => dispatch(loginWithFacebook()),
+        loginWithGoogle: () => dispatch(loginWithGoogle()),
     };
 }
 

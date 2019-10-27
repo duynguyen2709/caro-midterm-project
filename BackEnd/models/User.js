@@ -124,3 +124,18 @@ module.exports.updateFacebookID = async (username, facebookID) => {
 
     return res;
 };
+
+
+module.exports.updateGoogleID = async (username, googleID) => {
+
+    let query = `UPDATE User SET googleID = '${googleID}' where username = '${username}'`;
+    const [res, f] = await conn.getConnection()
+        .query(query).then(([rows, fields]) => {
+            return [rows, fields];
+        }).catch((err) => {
+            console.error(err.message);
+            return [null, null];
+        });
+
+    return res;
+};

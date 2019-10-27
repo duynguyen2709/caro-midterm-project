@@ -3,7 +3,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
 
-const LoginButtons = ({onClickLogin, onClickLoginFacebook}) => {
+const LoginButtons = ({onClickLogin, onClickLoginFacebook, onClickLoginGoogle}) => {
   return (<div style={{display: 'flex', flexDirection: 'column'}}>
       <Button
           type="primary"
@@ -30,7 +30,7 @@ const LoginButtons = ({onClickLogin, onClickLoginFacebook}) => {
       <Button
           type="primary"
           className="horizontal-center social-login-button"
-          onClick={onClickLogin}
+          onClick={onClickLoginGoogle}
           style={{
               background: '#d34836',
               borderColor: '#d34836'

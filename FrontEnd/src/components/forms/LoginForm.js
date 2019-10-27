@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import LoginButtons from "./LoginButtons";
 
-const LoginForm = ({errorText, onClickLogin, onClickLoginFacebook}) => {
+const LoginForm = ({errorText, onClickLogin, onClickLoginFacebook, onClickLoginGoogle}) => {
 
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -55,7 +55,9 @@ const LoginForm = ({errorText, onClickLogin, onClickLoginFacebook}) => {
                         />
 
                         <LoginButtons onClickLogin={() => onClickLogin(username,password)}
-                                      onClickLoginFacebook={onClickLoginFacebook}/>
+                                      onClickLoginFacebook={onClickLoginFacebook}
+                                      onClickLoginGoogle={onClickLoginGoogle}
+                        />
 
                         <div style={{
                             textAlign: 'center',
