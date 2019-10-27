@@ -46,7 +46,7 @@ export default class MoveHistoryTable extends React.Component {
                 render: (text) => {
                     return (<span className='number'
                                   style={{color: text === 'X' ? 'blue' : 'red'}}>
-                               {text}
+                               {(text === 'X') ? "X (Người)" : "O (Máy)"}
                         </span>)
                 }
             },

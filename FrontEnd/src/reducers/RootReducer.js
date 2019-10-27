@@ -89,7 +89,7 @@ function resetTable(state, action) {
     const checkWin = checkWinCondition(state.historySquares[action.index], action.i, action.j);
     const win = (checkWin != null);
 
-    return {
+    const newState = {
         ...state,
         squares: state.historySquares[action.index],
         isXNext: action.index % 2 === 1,
@@ -98,6 +98,23 @@ function resetTable(state, action) {
         totalChecked: action.index + 1,
         win
     };
+
+    if (action.index % 2 === 1 || win)
+        return newState;
+
+    let randI = Math.floor(Math.random() * 20);
+    let randJ = Math.floor(Math.random() * 20);
+
+    while (state.historySquares[action.index][randI][randJ] != null) {
+        randI = Math.floor(Math.random() * 20);
+        randJ = Math.floor(Math.random() * 20);
+    }
+
+    return onClickSquare(newState, {
+        i: randI,
+        j: randJ
+    });
+
 }
 
 export default function rootReducer(state = initialState, action) {
