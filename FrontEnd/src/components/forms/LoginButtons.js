@@ -4,41 +4,41 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 
 const LoginButtons = ({onClickLogin, onClickLoginFacebook, onClickLoginGoogle}) => {
-  return (<div style={{display: 'flex', flexDirection: 'column'}}>
-      <Button
-          type="primary"
-          htmlType="submit"
-          className="horizontal-center social-login-button button-shadow"
-          onClick={onClickLogin}
-          block={false}>
-          Đăng Nhập
-      </Button>
+    return (<div style={{display: 'flex', flexDirection: 'column'}}>
+        <Button
+            type="primary"
+            htmlType="submit"
+            className="horizontal-center social-login-button button-shadow"
+            onClick={onClickLogin}
+            block={false}>
+            Đăng Nhập
+        </Button>
 
-      <Button
-          type="primary"
-          className="horizontal-center social-login-button button-shadow"
-          onClick={onClickLoginFacebook}
-          style={{
-              background: '#4267B2',
-              borderColor: '#4267B2'
-          }}
-      >
-          <Icon type="facebook" theme="filled" style={{fontSize: '20px'}}/>
-          Đăng Nhập Bằng Facebook
-      </Button>
+        <Button
+            type="primary"
+            className="horizontal-center social-login-button button-shadow"
+            onClick={onClickLoginFacebook}
+            style={{
+                background: '#4267B2',
+                borderColor: '#4267B2'
+            }}
+        >
+            <Icon type="facebook" theme="filled" style={{fontSize: '20px'}}/>
+            Đăng Nhập Bằng Facebook
+        </Button>
 
-      <Button
-          type="primary"
-          className="horizontal-center social-login-button button-shadow"
-          onClick={onClickLoginGoogle}
-          style={{
-              background: '#d34836',
-              borderColor: '#d34836'
-          }}>
-          <Icon type="google-circle" theme="filled" style={{fontSize: '20px'}}/>
-          Đăng Nhập Bằng Google
-      </Button>
-  </div>)
+        <Button
+            type="primary"
+            className="horizontal-center social-login-button button-shadow"
+            onClick={onClickLoginGoogle}
+            style={{
+                background: '#d34836',
+                borderColor: '#d34836'
+            }}>
+            <Icon type="google-circle" theme="filled" style={{fontSize: '20px'}}/>
+            Đăng Nhập Bằng Google
+        </Button>
+    </div>)
 };
 
 

@@ -1,19 +1,19 @@
-import {NO_OF_ROW, NO_OF_COL, NUM_TO_WIN} from "./Constants";
+import {NO_OF_COL, NO_OF_ROW, NUM_TO_WIN} from "./Constants";
 
-function highlight(arr, currentSymbol){
+function highlight(arr, currentSymbol) {
     let color = null;
     if (currentSymbol === "X")
         color = "#fd4138";
     else
         color = "#000000";
 
-    for (let i=0; i< arr.length; i++){
+    for (let i = 0; i < arr.length; i++) {
         const key = `${arr[i].row}_${arr[i].col}`;
         document.getElementById(key).style.backgroundColor = color;
     }
 }
 
-function resetColor(){
+function resetColor() {
     const cells = document.getElementsByClassName('square');
 
     for (let i = 0; i < cells.length; i++)
@@ -54,7 +54,7 @@ function checkWinCondition(squares, i, j) {
 
             startIndex++;
 
-            for (let winInd = startIndex; winInd <= endIndex; winInd++){
+            for (let winInd = startIndex; winInd <= endIndex; winInd++) {
                 winArr.push({row: i, col: winInd});
             }
 
@@ -106,7 +106,7 @@ function checkWinCondition(squares, i, j) {
 
             startIndex++;
 
-            for (let winInd = startIndex; winInd <= endIndex; winInd++){
+            for (let winInd = startIndex; winInd <= endIndex; winInd++) {
                 winArr.push({row: winInd, col: j});
             }
 
@@ -173,7 +173,7 @@ function checkWinCondition(squares, i, j) {
 
             for (let winInd = startIndex[0], winInd2 = startIndex[1];
                  winInd <= endIndex[0] && winInd2 <= endIndex[1];
-                 winInd++ && winInd2++){
+                 winInd++ && winInd2++) {
                 winArr.push({row: winInd, col: winInd2})
             }
 
@@ -241,7 +241,7 @@ function checkWinCondition(squares, i, j) {
 
             for (let winInd = startIndex[0], winInd2 = startIndex[1];
                  winInd <= endIndex[0] && winInd2 >= endIndex[1];
-                 winInd++ && winInd2--){
+                 winInd++ && winInd2--) {
                 winArr.push({row: winInd, col: winInd2})
             }
 
@@ -266,25 +266,25 @@ function checkWinCondition(squares, i, j) {
     }
 
     const nRow = checkRow();
-    if (nRow != null){
+    if (nRow != null) {
         highlight(nRow, currentSymbol);
         return currentSymbol;
     }
 
     const nCol = checkColumn();
-    if (nCol != null){
+    if (nCol != null) {
         highlight(nCol, currentSymbol);
         return currentSymbol;
     }
 
     const nDiag = checkDiag();
-    if (nDiag != null){
+    if (nDiag != null) {
         highlight(nDiag, currentSymbol);
         return currentSymbol;
     }
 
     const nAntiDiag = checkAntiDiag();
-    if (nAntiDiag != null){
+    if (nAntiDiag != null) {
         highlight(nAntiDiag, currentSymbol);
         return currentSymbol;
     }

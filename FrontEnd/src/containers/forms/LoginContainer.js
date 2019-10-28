@@ -8,7 +8,7 @@ function LoginContainer(props) {
     const token = localStorage.getItem("token");
 
     if ((token != null && token !== '') || props.loggedIn)
-        return <Redirect to="/" />;
+        return <Redirect to="/"/>;
 
     return <LoginPage errorText={props.errorText}
                       isLoading={props.isLoading}

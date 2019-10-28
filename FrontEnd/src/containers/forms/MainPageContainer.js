@@ -19,7 +19,7 @@ function MainPageContainer(props) {
 
     if (props.user == null) {
         props.getUser();
-        return <Loading />;
+        return <Loading/>;
     }
 
 

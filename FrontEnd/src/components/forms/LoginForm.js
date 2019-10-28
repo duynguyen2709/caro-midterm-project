@@ -21,7 +21,7 @@ const LoginForm = ({errorText, isLoading, onClickLogin, onClickLoginFacebook, on
                 />
             </Row>
 
-            {isLoading ? <LoadingModal /> : null}
+            {isLoading ? <LoadingModal/> : null}
 
             <Row type="flex" justify="center">
                 <Col span={6} className="center">
@@ -58,7 +58,7 @@ const LoginForm = ({errorText, isLoading, onClickLogin, onClickLoginFacebook, on
                             placeholder="Password"
                         />
 
-                        <LoginButtons onClickLogin={() => onClickLogin(username,password)}
+                        <LoginButtons onClickLogin={() => onClickLogin(username, password)}
                                       onClickLoginFacebook={onClickLoginFacebook}
                                       onClickLoginGoogle={onClickLoginGoogle}
                         />
@@ -67,7 +67,7 @@ const LoginForm = ({errorText, isLoading, onClickLogin, onClickLoginFacebook, on
                             textAlign: 'center',
                             marginTop: '15px'
                         }}>
-                            <a href="/register" >Đăng Ký Tài Khoản</a>
+                            <a href="/register">Đăng Ký Tài Khoản</a>
                         </div>
                     </Card>
                 </Col>

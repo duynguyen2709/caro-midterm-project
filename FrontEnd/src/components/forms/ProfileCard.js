@@ -3,7 +3,7 @@ import {Card, Icon} from "antd";
 
 const {Meta} = Card;
 
-const ProfileCard = ({user}) => {
+const ProfileCard = ({user, onClickEdit}) => {
 
     return (<Card hoverable
                   className="box-shadow"
@@ -15,7 +15,7 @@ const ProfileCard = ({user}) => {
                       />
                   }
                   actions={[
-                      <span>
+                      <span onClick={() => onClickEdit(true)}>
                           <Icon style={{marginRight: '10px'}} type="edit" key="edit"/>
                           Cập nhật thông tin
                       </span>

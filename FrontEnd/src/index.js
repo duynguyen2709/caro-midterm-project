@@ -25,6 +25,6 @@ if (process.env.NODE_ENV !== 'production') {
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(<Provider store={store}>
-                    <MainRoute/>
-                </Provider>,
-                document.getElementById('root'));
+        <MainRoute/>
+    </Provider>,
+    document.getElementById('root'));

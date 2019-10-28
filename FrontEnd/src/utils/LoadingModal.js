@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const LoadingModal = React.memo(() => ReactDOM.createPortal(
+const LoadingModal = () => ReactDOM.createPortal(
     <>
         <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
             <div className="page-mask"/>
@@ -10,6 +10,6 @@ const LoadingModal = React.memo(() => ReactDOM.createPortal(
             </div>
         </div>
     </>, document.body
-));
+);
 
 export default LoadingModal;

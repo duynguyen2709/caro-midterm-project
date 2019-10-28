@@ -4,13 +4,13 @@ import React from 'react';
 import RegisterForm from '../../components/forms/RegisterForm';
 import {register, setErrorText} from "../../actions/ApiActions";
 
-function RegisterContainer(props)  {
+function RegisterContainer(props) {
 
-    function validateInfo(user){
+    function validateInfo(user) {
         const {username, password, retypePassword, email, fullName} = user;
 
         if (username === '' || password === '' ||
-            email === '' || fullName === ''){
+            email === '' || fullName === '') {
             props.setErrorText('Thông tin không được rỗng. Vui lòng nhập lại');
             return;
         }

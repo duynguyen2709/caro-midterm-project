@@ -1,20 +1,26 @@
 import {Button, Col, Row} from 'antd';
-import * as React from 'react';
+import ReactCardFlip from 'react-card-flip';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import 'antd/dist/antd.css';
 import '../../index.css';
 import Error from "../utils/Error";
 import ProfileCard from "./ProfileCard";
+import EditProfileCard from "./EditProfileCard";
 
 const MainPage = ({errorText, user, onClickLogout}) => {
     const history = useHistory();
+    const [flip, setFlip] = useState(false);
 
     if (errorText != null && errorText !== '')
         return <Error/>;
 
     return (<Row type="flex" align="middle" justify="center" className="all-centered">
         <Col>
-            <ProfileCard user={user} />
+            <ReactCardFlip isFlipped={flip}>
+                <ProfileCard key="front" user={user} onClickEdit={setFlip}/>
+                <EditProfileCard key="back" user={user} onClickCancel={setFlip} />
+            </ReactCardFlip>
         </Col>
 
         <Col style={{margin: 'auto 50px', width: '200px'}}>

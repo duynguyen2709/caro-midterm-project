@@ -1,4 +1,4 @@
-import { ActionConstant } from '../utils/Constants';
+import {ActionConstant} from '../utils/Constants';
 
 const initialState = {
     user: null,
@@ -7,7 +7,7 @@ const initialState = {
     errorText: ''
 };
 
-export default function apiReducer(state = initialState, action){
+export default function apiReducer(state = initialState, action) {
 
     switch (action.type) {
         case ActionConstant.SET_ERROR:
@@ -20,13 +20,13 @@ export default function apiReducer(state = initialState, action){
             return {
                 ...state,
                 errorText: '',
-                isLoading : true
+                isLoading: true
             };
         case ActionConstant.LOGIN_SUCCESS:
             return {
                 ...state,
                 user: action.user,
-                isLoading : false,
+                isLoading: false,
                 errorText: '',
                 loggedIn: true
             };

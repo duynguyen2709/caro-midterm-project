@@ -24,7 +24,7 @@ export default class MoveHistoryTable extends React.Component {
         }
 
         rows[this.props.currentSelected].style.backgroundColor = '#ffb35f';
-        for (let i = 0 ; i < rows.length ; i++){
+        for (let i = 0; i < rows.length; i++) {
             if (i !== this.props.currentSelected &&
                 rows[i].style.backgroundColor.toString() !== 'rgb(252, 205, 142)') {
                 rows[i].style.backgroundColor = '#fccd8e';
@@ -99,7 +99,9 @@ export default class MoveHistoryTable extends React.Component {
                        onRow={(record, rowIndex) => {
                            return {
                                // eslint-disable-next-line no-unused-vars
-                               onClick: event => {this.props.setCurrentSelected(rowIndex)}
+                               onClick: event => {
+                                   this.props.setCurrentSelected(rowIndex)
+                               }
                            };
                        }}
                 />
