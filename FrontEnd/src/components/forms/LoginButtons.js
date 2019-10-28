@@ -8,7 +8,7 @@ const LoginButtons = ({onClickLogin, onClickLoginFacebook, onClickLoginGoogle}) 
       <Button
           type="primary"
           htmlType="submit"
-          className="horizontal-center social-login-button"
+          className="horizontal-center social-login-button button-shadow"
           onClick={onClickLogin}
           block={false}>
           Đăng Nhập
@@ -16,7 +16,7 @@ const LoginButtons = ({onClickLogin, onClickLoginFacebook, onClickLoginGoogle}) 
 
       <Button
           type="primary"
-          className="horizontal-center social-login-button"
+          className="horizontal-center social-login-button button-shadow"
           onClick={onClickLoginFacebook}
           style={{
               background: '#4267B2',
@@ -29,7 +29,7 @@ const LoginButtons = ({onClickLogin, onClickLoginFacebook, onClickLoginGoogle}) 
 
       <Button
           type="primary"
-          className="horizontal-center social-login-button"
+          className="horizontal-center social-login-button button-shadow"
           onClick={onClickLoginGoogle}
           style={{
               background: '#d34836',

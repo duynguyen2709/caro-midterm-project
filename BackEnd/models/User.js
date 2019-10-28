@@ -20,6 +20,7 @@ module.exports.getUser = async (username) => {
         password: res[0].password,
         fullName: res[0].fullName,
         email: res[0].email,
+        avatar: res[0].avatar,
     };
 };
 
@@ -43,6 +44,7 @@ module.exports.findByFacebookID = async (facebookID) => {
         password: res[0].password,
         fullName: res[0].fullName,
         email: res[0].email,
+        avatar: res[0].avatar,
     };
 };
 
@@ -87,10 +89,14 @@ module.exports.findByEmail = async (email) => {
         password: res[0].password,
         fullName: res[0].fullName,
         email: res[0].email,
+        avatar: res[0].avatar,
     };
 };
 
 module.exports.createUser = async (user) => {
+    if (user.avatar == null)
+        user.avatar = 'https://www.speakingtigerbooks.com/wp-content/uploads/2017/05/default-avatar.png';
+
     const hash = bcrypt.hashSync(user.password, 8);
     const [res, f] = await conn.getConnection()
         .query('INSERT INTO User SET ?', {
@@ -99,7 +105,8 @@ module.exports.createUser = async (user) => {
             email: user.email,
             fullName: user.fullName,
             facebookID: user.facebookID,
-            googleID: user.googleID
+            googleID: user.googleID,
+            avatar: user.avatar
         }).then(([rows, fields]) => {
             return [rows, fields];
         }).catch((err) => {

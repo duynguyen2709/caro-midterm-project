@@ -1,27 +1,29 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, useHistory, withRouter} from 'react-router-dom'
+import {getUser, logout} from "../../actions/ApiActions";
+import Loading from "../../components/utils/Loading";
 import MainPage from "../../components/forms/MainPage";
-import {getUsername, logout} from "../../actions/ApiActions";
 
 function MainPageContainer(props) {
     const token = localStorage.getItem("token");
     const history = useHistory();
 
     if (token == null || token === '')
-        return <Redirect to="/login" />;
+        return <Redirect to="/login"/>;
 
-    function redirect(){
+    function redirect() {
         props.logout();
         history.push("/login");
     }
 
-    if (props.username == null){
-        props.getUsername();
+    if (props.user == null) {
+        props.getUser();
+        return <Loading />;
     }
 
     return <MainPage errorText={props.errorText}
-                     username={props.username}
+                     user={props.user}
                      onClickLogout={redirect}/>;
 }
 
@@ -29,14 +31,14 @@ function mapStateToProps(state) {
     return {
         errorText: state.api.errorText,
         loggedIn: state.api.loggedIn,
-        username: state.api.username
+        user: state.api.user
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         logout: () => dispatch(logout()),
-        getUsername: () => dispatch(getUsername())
+        getUser: () => dispatch(getUser())
     };
 }
 

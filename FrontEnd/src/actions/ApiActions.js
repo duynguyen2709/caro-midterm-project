@@ -14,10 +14,10 @@ function callApiStart() {
     };
 }
 
-function loginSuccess(username) {
+function loginSuccess(user) {
     return {
         type: ActionConstant.LOGIN_SUCCESS,
-        username
+        user
     };
 }
 
@@ -39,10 +39,10 @@ export const register = (user) => {
     }
 };
 
-export const getUsername = () => {
+export const getUser = () => {
     return (dispatch, getState) => {
-        const {username} = getState().api;
-        if (username != null && username !== '')
+        const {user} = getState().api;
+        if (user != null && user !== '')
             return null;
 
         const token = localStorage.getItem("token");
@@ -87,7 +87,7 @@ export const login = (username, password) => {
             .then(data => {
                 if (data.returnCode === 1) {
                     localStorage.setItem("token", data.token);
-                    dispatch(getUsername());
+                    dispatch(getUser());
                 } else {
                     dispatch(setErrorText(data.message));
                 }
@@ -110,7 +110,7 @@ export const loginWithFacebook = () => {
             const {data} = message;
             if (data.returnCode === 1) {
                 localStorage.setItem("token", data.token);
-                return dispatch(getUsername());
+                return dispatch(getUser());
             } else {
                 return dispatch(setErrorText(data.message));
             }
@@ -134,7 +134,7 @@ export const loginWithGoogle = () => {
             const {data} = message;
             if (data.returnCode === 1) {
                 localStorage.setItem("token", data.token);
-                return dispatch(getUsername());
+                return dispatch(getUser());
             } else {
                 return dispatch(setErrorText(data.message));
             }

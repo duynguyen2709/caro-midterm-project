@@ -83,7 +83,7 @@ const RegisterForm = ({errorText, onClickRegister}) => {
                     <Button
                         type="primary"
                         htmlType="submit"
-                        className="login-form-button horizontal-center"
+                        className="login-form-button horizontal-center button-shadow"
                         onClick={() => onClickRegister({
                             username,
                             password,

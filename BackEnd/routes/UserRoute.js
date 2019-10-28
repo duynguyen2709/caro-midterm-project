@@ -24,6 +24,7 @@ router.post('/user/login', function (req, res, next) {
                 username: user.username,
                 fullName: user.fullName,
                 email: user.email,
+                avatar: user.avatar,
             }, '1612145');
 
             return res.json({
@@ -65,6 +66,7 @@ router.get('/auth/facebook/callback',
             username: user.username,
             fullName: user.fullName,
             email: user.email,
+            avatar: user.avatar,
         }, '1612145');
 
         let responseHTML = '<script>res = %value%; window.opener.postMessage(res, "*");window.close();</script>';
@@ -90,6 +92,7 @@ router.get('/auth/google/callback',
             username: user.username,
             fullName: user.fullName,
             email: user.email,
+            avatar: user.avatar,
         }, '1612145');
 
         let responseHTML = '<script>res = %value%; window.opener.postMessage(res, "*");window.close();</script>';

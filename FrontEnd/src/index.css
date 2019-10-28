@@ -133,7 +133,7 @@ ol, ul {
 }
 
 .social-login-button {
-  margin-top: 10px;
+  margin-top: 15px;
   font-weight: bold;
 }
 
@@ -158,4 +158,44 @@ ol, ul {
 .anticon-caret-up,
 .anticon-caret-down {
   color: black;
+}
+
+.all-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+
+.box-shadow {
+  -webkit-box-shadow: -5px 5px 20px 0 rgba(97,97,97,0.6);
+  -moz-box-shadow: -5px 5px 20px 0 rgba(97,97,97,0.6);
+  box-shadow: -5px 5px 20px 0 rgba(97,97,97,0.6);
+}
+
+.button-shadow {
+  -webkit-box-shadow: -3px 3px 10px 0 rgba(97,97,97,0.4);
+  -moz-box-shadow: -3px 3px 10px 0 rgba(97,97,97,0.4);
+  box-shadow: -3px 3px 10px 0 rgba(97,97,97,0.4);
+}
+
+#btnPlayOnline:hover {
+  color: #f7edbc;
+  border: 1px solid #e29722;
+}
+
+.button-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.avatar {
+  width: 298px;
+  height: 298px;
+}
+
+.ant-card-meta-title {
+  font-size: 20px;
 }

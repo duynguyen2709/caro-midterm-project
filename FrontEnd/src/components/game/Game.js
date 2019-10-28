@@ -70,8 +70,9 @@ class Game extends React.Component {
 
                 <Button style={{width: 'fit-content', fontWeight: 'bold'}}
                         type="primary"
+                        icon="caret-left"
                         onClick={this.goBack}>
-                    {"\u003C"}= Trang Chủ
+                    Trang Chủ
                 </Button>
 
                 <div className="game">

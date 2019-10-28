@@ -35,7 +35,7 @@ const LoginForm = ({errorText, onClickLogin, onClickLoginFacebook, onClickLoginG
                         <p style={{textAlign: 'center', color: 'red'}}>{errorText}</p>
 
                         <Input
-                            style={{marginBottom: 12}}
+                            style={{marginBottom: 15}}
                             prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
                             name="username"
                             value={username}
@@ -61,9 +61,9 @@ const LoginForm = ({errorText, onClickLogin, onClickLoginFacebook, onClickLoginG
 
                         <div style={{
                             textAlign: 'center',
-                            marginTop: '10px'
+                            marginTop: '15px'
                         }}>
-                            <a href="/register" style={{fontWeight: 'bold'}}>Đăng Ký Tài Khoản</a>
+                            <a href="/register" >Đăng Ký Tài Khoản</a>
                         </div>
                     </Card>
                 </Col>

@@ -52,7 +52,7 @@ passport.use(new JWTStrategy({
         secretOrKey: '1612145'
     },
     function (jwtPayload, next) {
-        next(null, jwtPayload.username);
+        next(null, jwtPayload);
     }
 ));
 
@@ -60,7 +60,7 @@ passport.use(new FacebookStrategy({
         clientID: '517742439047265',
         clientSecret: 'f892f01725ffc6d872fb2d221fac443f',
         callbackURL: '/auth/facebook/callback',
-        profileFields: ['id', 'displayName', 'emails']
+        profileFields: ['id', 'displayName', 'emails', 'picture.type(large)']
     },
     function (accessToken, refreshToken, profile, cb) {
         try {
@@ -82,6 +82,7 @@ passport.use(new FacebookStrategy({
                                         newUser.email = profile.emails[0].value;
                                         newUser.facebookID = profile.id;
                                         newUser.googleID = '';
+                                        newUser.avatar = profile.photos[0].value;
 
                                         UserModel.createUser(newUser)
                                             .then(() => {
@@ -129,6 +130,7 @@ passport.use(new GoogleStrategy({
                                         newUser.email = profile.emails[0].value;
                                         newUser.facebookID = '';
                                         newUser.googleID = profile.id;
+                                        newUser.avatar = profile.photos[0].value;
 
                                         UserModel.createUser(newUser)
                                             .then(() => {
