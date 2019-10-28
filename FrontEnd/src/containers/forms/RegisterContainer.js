@@ -23,12 +23,15 @@ function RegisterContainer(props)  {
         props.register(user);
     }
 
-    return <RegisterForm errorText={props.errorText} onClickRegister={validateInfo}/>
+    return <RegisterForm errorText={props.errorText}
+                         isLoading={props.isLoading}
+                         onClickRegister={validateInfo}/>
 }
 
 function mapStateToProps(state) {
     return {
-        errorText: state.api.errorText
+        errorText: state.api.errorText,
+        isLoading: state.api.isLoading,
     };
 }
 

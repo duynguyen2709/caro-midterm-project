@@ -11,6 +11,7 @@ function LoginContainer(props) {
         return <Redirect to="/" />;
 
     return <LoginPage errorText={props.errorText}
+                      isLoading={props.isLoading}
                       onClickLogin={props.login}
                       onClickLoginFacebook={props.loginWithFacebook}
                       onClickLoginGoogle={props.loginWithGoogle}
@@ -20,7 +21,8 @@ function LoginContainer(props) {
 function mapStateToProps(state) {
     return {
         errorText: state.api.errorText,
-        loggedIn: state.api.loggedIn
+        loggedIn: state.api.loggedIn,
+        isLoading: state.api.isLoading,
     };
 }
 

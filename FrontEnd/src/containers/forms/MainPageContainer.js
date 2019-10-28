@@ -22,6 +22,7 @@ function MainPageContainer(props) {
         return <Loading />;
     }
 
+
     return <MainPage errorText={props.errorText}
                      user={props.user}
                      onClickLogout={redirect}/>;

@@ -2,8 +2,9 @@ import {Button, Card, Col, Icon, Input, Row} from 'antd';
 import React, {useState} from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
+import LoadingModal from "../../utils/LoadingModal";
 
-const RegisterForm = ({errorText, onClickRegister}) => {
+const RegisterForm = ({errorText, isLoading, onClickRegister}) => {
 
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -20,6 +21,9 @@ const RegisterForm = ({errorText, onClickRegister}) => {
                  }}
             />
         </Row>
+
+        {isLoading ? <LoadingModal /> : null}
+
         <Row type="flex" justify="center">
             <Col span={6} className="center">
                 <Card style={{

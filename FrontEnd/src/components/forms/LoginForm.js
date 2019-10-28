@@ -3,8 +3,9 @@ import React, {useState} from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
 import LoginButtons from "./LoginButtons";
+import LoadingModal from "../../utils/LoadingModal";
 
-const LoginForm = ({errorText, onClickLogin, onClickLoginFacebook, onClickLoginGoogle}) => {
+const LoginForm = ({errorText, isLoading, onClickLogin, onClickLoginFacebook, onClickLoginGoogle}) => {
 
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -19,6 +20,9 @@ const LoginForm = ({errorText, onClickLogin, onClickLoginFacebook, onClickLoginG
                      }}
                 />
             </Row>
+
+            {isLoading ? <LoadingModal /> : null}
+
             <Row type="flex" justify="center">
                 <Col span={6} className="center">
 

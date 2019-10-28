@@ -182,20 +182,51 @@ ol, ul {
   box-shadow: -3px 3px 10px 0 rgba(97,97,97,0.4);
 }
 
-#btnPlayOnline:hover {
-  color: #f7edbc;
-  border: 1px solid #e29722;
-}
-
 .button-shadow:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .avatar {
-  width: 298px;
-  height: 298px;
+  width: 248px;
+  height: 248px;
 }
 
 .ant-card-meta-title {
   font-size: 20px;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  /* Light grey */
+  border-top: 16px solid #3498db;
+  /* Blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.modal {
+  text-align: center;
+  padding: 0 !important;
+}
+
+.page-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0,0,0,0.6);
 }
