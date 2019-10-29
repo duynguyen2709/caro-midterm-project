@@ -10,8 +10,7 @@ const LoginForm = ({errorText, isLoading, onClickLogin, onClickLoginFacebook, on
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
-    return <div style={{display: 'flex', flexDirection: 'column'}}>
-        <div>
+    return <>
             <Row type="flex" justify="center">
                 <img alt="logo" src={`${process.env.PUBLIC_URL}logo.png`}
                      style={{
@@ -72,8 +71,7 @@ const LoginForm = ({errorText, isLoading, onClickLogin, onClickLoginFacebook, on
                     </Card>
                 </Col>
             </Row>
-        </div>
-    </div>
+        </>
 };
 
 export default LoginForm;

@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import {Button, Card, Icon, Input} from "antd";
+import AvatarUpload from "./AvatarUpload";
 
-const EditProfileCard = ({user, onClickCancel}) => {
+const EditProfileCard = React.memo(({user, onClickCancel}) => {
     const [email, setEmail] = useState(user.email);
     const [fullName, setFullName] = useState(user.fullName);
+    const [avatar, setAvatar] = useState(user.avatar);
+    const [avatarFile, setAvatarFile] = useState(null);
 
     return (<Card hoverable
                   className="box-shadow"
@@ -11,10 +14,12 @@ const EditProfileCard = ({user, onClickCancel}) => {
                   cover={
                       <img className="avatar"
                            alt="avatar"
-                           src={user.avatar}
+                           src={avatar}
                       />
                   }
     >
+        <AvatarUpload setAvatar={setAvatar} setFile={setAvatarFile}/>
+
         <Input
             style={{marginBottom: 12}}
             prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
@@ -44,19 +49,19 @@ const EditProfileCard = ({user, onClickCancel}) => {
         <Button
             type="default"
             className="button-shadow"
-            style={{float: 'left'}}
-            onClick={() => onClickCancel(false)}
+            style={{float: 'left', marginTop: '5px'}}
+            onClick={onClickCancel}
         >
             Hủy
         </Button>
         <Button
             type="primary"
             className="button-shadow"
-            style={{float: 'right'}}
+            style={{float: 'right', marginTop: '5px'}}
         >
             Cập Nhật
         </Button>
     </Card>)
-};
+});
 
 export default EditProfileCard;

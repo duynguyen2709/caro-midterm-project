@@ -12,7 +12,7 @@ const RegisterForm = ({errorText, isLoading, onClickRegister}) => {
     const [email, setEmail] = useState('');
     const [fullName, setFullName] = useState('');
 
-    return <div>
+    return <>
         <Row type="flex" justify="center">
             <img alt="logo" src={`${process.env.PUBLIC_URL}logo.png`}
                  style={{
@@ -108,7 +108,7 @@ const RegisterForm = ({errorText, isLoading, onClickRegister}) => {
                 </Card>
             </Col>
         </Row>
-    </div>
+    </>
 };
 
 export default RegisterForm;
