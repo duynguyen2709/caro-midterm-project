@@ -3,6 +3,13 @@ const router = express.Router();
 const UserController = require('../controllers/UserController');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const Multer = require('multer');
+const multer = Multer({
+    storage: Multer.memoryStorage(),
+    limits: {
+        fileSize: 5 * 1024 * 1024
+    }
+});
 
 router.post('/user/register', UserController.registerUser);
 
@@ -35,6 +42,8 @@ router.post('/user/login', function (req, res, next) {
     })(req, res);
 });
 
+router.post('/user/update',multer.any(), UserController.updateUserInfo);
+
 router.get('/me', function (req, res, next) {
     passport.authenticate('jwt', {
         session: false
@@ -51,56 +60,5 @@ router.get('/me', function (req, res, next) {
         });
     })(req, res, next);
 });
-
-router.get('/auth/facebook', passport.authenticate('facebook',
-    {scope: ['email']}));
-
-router.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        failureRedirect: 'http://localhost:3001/login',
-        session: false
-
-    }), (req, res) => {
-        const user = req.user;
-        const token = jwt.sign({
-            username: user.username,
-            fullName: user.fullName,
-            email: user.email,
-            avatar: user.avatar,
-        }, '1612145');
-
-        let responseHTML = '<script>res = %value%; window.opener.postMessage(res, "*");window.close();</script>';
-        responseHTML = responseHTML.replace('%value%', JSON.stringify({
-            returnCode: 1,
-            token: token
-        }));
-        res.send(responseHTML);
-    });
-
-
-router.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'email', 'openid']
-}));
-
-router.get('/auth/google/callback',
-    passport.authenticate('google', {
-        failureRedirect: 'http://localhost:3001/login',
-        session: false
-    }), (req, res) => {
-        const user = req.user;
-        const token = jwt.sign({
-            username: user.username,
-            fullName: user.fullName,
-            email: user.email,
-            avatar: user.avatar,
-        }, '1612145');
-
-        let responseHTML = '<script>res = %value%; window.opener.postMessage(res, "*");window.close();</script>';
-        responseHTML = responseHTML.replace('%value%', JSON.stringify({
-            returnCode: 1,
-            token: token
-        }));
-        res.send(responseHTML);
-    });
 
 module.exports = router;

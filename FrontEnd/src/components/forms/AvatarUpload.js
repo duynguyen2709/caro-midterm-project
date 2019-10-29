@@ -18,24 +18,6 @@ const AvatarUpload = React.memo(({setAvatar, setFile}) => {
         );
     };
 
-    // handleSubmit = event => {
-    //     event.preventDefault();
-    //
-    //     const formData = new FormData();
-    //     // add one or more of your files in FormData
-    //     // again, the original file is located at the `originFileObj` key
-    //     formData.append("file", this.state.fileList[0].originFileObj);
-    //
-    //     axios
-    //         .post("http://api.foo.com/bar", formData)
-    //         .then(res => {
-    //             console.log("res", res);
-    //         })
-    //         .catch(err => {
-    //             console.log("err", err);
-    //         });
-    // };
-
     return (
         <>
             <Upload accept="image/*"

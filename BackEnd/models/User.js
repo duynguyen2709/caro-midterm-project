@@ -146,3 +146,17 @@ module.exports.updateGoogleID = async (username, googleID) => {
 
     return res;
 };
+
+module.exports.updateUserInfo = async (username, avatar, email, fullName) => {
+
+    let query = `UPDATE User SET email = '${email}', fullName = '${fullName}', avatar = '${avatar}' where username = '${username}'`;
+    const [res, f] = await conn.getConnection()
+        .query(query).then(([rows, fields]) => {
+            return [rows, fields];
+        }).catch((err) => {
+            console.error(err.message);
+            return [null, null];
+        });
+
+    return res;
+};

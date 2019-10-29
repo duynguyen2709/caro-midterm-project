@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ActionConstant} from "../utils/Constants";
+import {ActionConstant, SYSTEM_ERROR} from "../utils/Constants";
 
 export const setErrorText = (value) => {
     return {
@@ -14,6 +14,12 @@ function callApiStart() {
     };
 }
 
+function editingStart() {
+    return {
+        type: ActionConstant.EDIT_INFO_START
+    };
+}
+
 function loginSuccess(user) {
     return {
         type: ActionConstant.LOGIN_SUCCESS,
@@ -22,9 +28,7 @@ function loginSuccess(user) {
 }
 
 export const register = (user) => {
-    return (dispatch, getState) => {
-        if (getState().api.isLoading)
-            return null;
+    return dispatch => {
 
         dispatch(callApiStart());
 
@@ -34,16 +38,13 @@ export const register = (user) => {
             timeout: 5000
         }).then(data => data.data)
             .then(data => {
-                dispatch(setErrorText(data.message));
-            }).catch(() => dispatch(setErrorText('Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau')));
+                return dispatch(setErrorText(data.message));
+            }).catch(() => dispatch(setErrorText(SYSTEM_ERROR)));
     }
 };
 
 export const getUser = () => {
-    return (dispatch, getState) => {
-        const {user} = getState().api;
-        if (user != null && user !== '')
-            return null;
+    return dispatch => {
 
         const token = localStorage.getItem("token");
         dispatch(callApiStart());
@@ -56,11 +57,11 @@ export const getUser = () => {
             .then(data => data.data)
             .then(data => {
                 if (data.returnCode === 1) {
-                    dispatch(loginSuccess(data.message));
-                } else {
-                    dispatch(setErrorText(data.message));
+                    return dispatch(loginSuccess(data.message));
                 }
-            }).catch(() => dispatch(setErrorText('Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau')));
+                return dispatch(setErrorText(data.message));
+
+            }).catch(() => dispatch(setErrorText(SYSTEM_ERROR)));
     }
 };
 
@@ -72,9 +73,7 @@ export function logout() {
 }
 
 export const login = (username, password) => {
-    return (dispatch, getState) => {
-        if (getState().api.isLoading)
-            return null;
+    return dispatch => {
 
         dispatch(callApiStart());
 
@@ -87,18 +86,16 @@ export const login = (username, password) => {
             .then(data => {
                 if (data.returnCode === 1) {
                     localStorage.setItem("token", data.token);
-                    dispatch(getUser());
-                } else {
-                    dispatch(setErrorText(data.message));
+                    return dispatch(getUser());
                 }
-            }).catch(() => dispatch(setErrorText('Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau')));
+                return dispatch(setErrorText(data.message));
+
+            }).catch(() => dispatch(setErrorText(SYSTEM_ERROR)));
     };
 };
 
 export const loginWithFacebook = () => {
-    return (dispatch, getState) => {
-        if (getState().api.isLoading)
-            return null;
+    return (dispatch) => {
 
         dispatch(callApiStart());
 
@@ -106,39 +103,60 @@ export const loginWithFacebook = () => {
             "mywindow",
             "location=1,status=1,scrollbars=1, width=700,height=550");
 
-        window.addEventListener('message', (message) => {
+        window.addEventListener('message', function getData(message) {
             const {data} = message;
-            if (data.returnCode === 1) {
-                localStorage.setItem("token", data.token);
-                return dispatch(getUser());
-            } else {
+            if (data.returnCode) {
+                window.removeEventListener('message', getData);
+                if (data.returnCode === 1) {
+                    localStorage.setItem("token", data.token);
+                    return dispatch(getUser());
+                }
                 return dispatch(setErrorText(data.message));
             }
+            return null;
         });
         return null;
     };
 };
 
 export const loginWithGoogle = () => {
-    return (dispatch, getState) => {
-        if (getState().api.isLoading)
-            return null;
-
+    return (dispatch) => {
         dispatch(callApiStart());
 
         window.open(`${process.env.REACT_APP_BACKEND_URL}auth/google`,
             "mywindow",
             "location=1,status=1,scrollbars=1, width=700,height=550");
 
-        window.addEventListener('message', (message) => {
+        window.addEventListener('message', function getData(message) {
             const {data} = message;
-            if (data.returnCode === 1) {
-                localStorage.setItem("token", data.token);
-                return dispatch(getUser());
-            } else {
+            if (data.returnCode) {
+                window.removeEventListener('message', getData);
+                if (data.returnCode === 1) {
+                    localStorage.setItem("token", data.token);
+                    return dispatch(getUser());
+                }
                 return dispatch(setErrorText(data.message));
             }
+            return null;
         });
         return null;
     };
+};
+
+export const updateUserInfo = (userData) => {
+    return (dispatch) => {
+        dispatch(editingStart());
+
+        return axios.post(`${process.env.REACT_APP_BACKEND_URL}user/update`,
+            userData,
+            {
+                timeout: 20000
+            }).then(data => data.data)
+            .then(data => {
+                if (data.returnCode === 1) {
+                    return dispatch(getUser());
+                }
+                return dispatch(setErrorText(data.message));
+            }).catch(() => dispatch(setErrorText(SYSTEM_ERROR)));
+    }
 };

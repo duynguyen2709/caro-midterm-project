@@ -52,7 +52,14 @@ passport.use(new JWTStrategy({
         secretOrKey: '1612145'
     },
     function (jwtPayload, next) {
-        next(null, jwtPayload);
+        UserModel.getUser(jwtPayload.username)
+            .then(user => {
+                if (!user) {
+                    next(null, jwtPayload);
+                } else {
+                    next(null, user);
+                }
+            }).catch(() => next(null, jwtPayload));
     }
 ));
 

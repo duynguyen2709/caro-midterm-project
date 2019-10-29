@@ -4,14 +4,21 @@ export const NO_OF_COL = 20;
 export const NUM_TO_WIN = 5;
 
 export const ActionConstant = {
+    // GAME
     INIT_BOARD: "INIT_BOARD",
     RESET_BOARD: "RESET_BOARD",
     RESET_TABLE: "RESET_TABLE",
     SET_CURRENT_SELECTED: "SET_CURRENT_SELECTED",
-    SET_ERROR: "SET_ERROR",
     ON_CLICK_SQUARE: "ON_CLICK_SQUARE",
+
+    // API
+    SET_ERROR: "SET_ERROR",
     SET_USERNAME: "SET_USERNAME",
     CALL_API_START: "CALL_API_START",
+    EDIT_INFO_START: "EDIT_INFO_START",
     LOGIN_SUCCESS: "LOGIN_SUCCESS",
-    LOGOUT: "LOGOUT"
+    LOGOUT: "LOGOUT",
+    UPDATE_INFO: "UPDATE_INFO",
 };
+
+export const SYSTEM_ERROR = "Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau";

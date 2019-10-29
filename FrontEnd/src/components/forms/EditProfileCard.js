@@ -2,11 +2,23 @@ import React, {useState} from 'react';
 import {Button, Card, Icon, Input} from "antd";
 import AvatarUpload from "./AvatarUpload";
 
-const EditProfileCard = React.memo(({user, onClickCancel}) => {
+const EditProfileCard = React.memo(({user, onClickUpdateInfo, onClickCancel}) => {
     const [email, setEmail] = useState(user.email);
     const [fullName, setFullName] = useState(user.fullName);
     const [avatar, setAvatar] = useState(user.avatar);
     const [avatarFile, setAvatarFile] = useState(null);
+
+    const updateInfo = () => {
+        const formData = new FormData();
+        if (avatarFile)
+            formData.append("file", avatarFile.originFileObj);
+        formData.append("username", user.username);
+        formData.append("email", email);
+        formData.append("fullName", fullName);
+        formData.append("avatar", user.avatar);
+
+        onClickUpdateInfo(formData);
+    };
 
     return (<Card hoverable
                   className="box-shadow"
@@ -58,6 +70,7 @@ const EditProfileCard = React.memo(({user, onClickCancel}) => {
             type="primary"
             className="button-shadow"
             style={{float: 'right', marginTop: '5px'}}
+            onClick={updateInfo}
         >
             Cập Nhật
         </Button>
