@@ -1,9 +1,16 @@
 import {Button} from "antd";
-import React from "react";
+import React, {useCallback} from "react";
 import {useHistory} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {logout} from "../../actions/ApiActions";
 
-const PlayButtons = React.memo(({onClickLogout}) => {
+const PlayButtons = React.memo(() => {
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    const logoutCallback = useCallback(() => {
+        dispatch(logout());
+    },[dispatch]);
 
     return (<>
         <Button
@@ -40,7 +47,7 @@ const PlayButtons = React.memo(({onClickLogout}) => {
             block
             htmlType="button"
             className="horizontal-center button-shadow"
-            onClick={onClickLogout}
+            onClick={logoutCallback}
         >
             Đăng Xuất
         </Button>

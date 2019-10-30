@@ -9,7 +9,7 @@ import EditProfileCard from "./EditProfileCard";
 import PlayButtons from "./PlayButtons";
 import LoadingModal from "../../utils/LoadingModal";
 
-const MainPage = ({errorText, user, isEditing, onClickUpdateInfo, onClickLogout}) => {
+const MainPage = ({errorText, user, isEditing}) => {
 
     const [flip, setFlip] = useState(false);
 
@@ -41,13 +41,12 @@ const MainPage = ({errorText, user, isEditing, onClickUpdateInfo, onClickLogout}
 
                         <EditProfileCard key="back"
                                          user={user}
-                                         onClickUpdateInfo={onClickUpdateInfo}
                                          onClickCancel={toggleFlip}/>
                     </ReactCardFlip>
                 </Col>
 
                 <Col style={{margin: 'auto 50px', width: '200px'}}>
-                    <PlayButtons onClickLogout={onClickLogout}/>
+                    <PlayButtons />
                 </Col>
 
             </Row>
