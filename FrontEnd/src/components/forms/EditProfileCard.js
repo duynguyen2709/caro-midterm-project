@@ -74,6 +74,14 @@ const EditProfileCard = React.memo(({user, onClickUpdateInfo, onClickCancel}) =>
         >
             Cập Nhật
         </Button>
+
+        <Button
+            type="link"
+            style={{marginTop: '10px', marginBottom: '-5px'}}
+        >
+            Đổi Mật Khẩu ?
+        </Button>
+
     </Card>)
 });
 
