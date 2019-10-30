@@ -191,12 +191,12 @@ ol, ul {
 }
 
 .ant-card-meta-title {
-  font-size: 19px;
+  font-size: 20px;
 }
 
-.ant-card-actions {
-  margin-top: 70px;
-}
+/*.ant-card-actions {*/
+/*  margin-top: 70px;*/
+/*}*/
 
 .loader {
   border: 16px solid #f3f3f3;
