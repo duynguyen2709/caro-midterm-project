@@ -20,8 +20,8 @@ const MainPage = ({errorText, user, isEditing, onClickUpdateInfo, onClickLogout}
     useEffect(() => {
         if (!isEditing && flip)
             toggleFlip();
-
-    }, [isEditing, flip, toggleFlip]);
+    // eslint-disable-next-line
+    }, [isEditing]);
 
     if (errorText != null && errorText !== '')
         return <Error/>;

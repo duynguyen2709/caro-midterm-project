@@ -15,11 +15,12 @@ const ProfileCard = React.memo(({user, onClickEdit}) => {
                       />
                   }
                   actions={[
-                      // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-                      <span onClick={onClickEdit} style={{fontSize: '16px'}}>
-                          <Icon style={{marginRight: '10px'}} type="edit" key="edit"/>
-                          Cập nhật thông tin
-                      </span>
+                        <span onClick={onClickEdit}
+                            style={{fontSize: '17px'}}>
+                              <Icon style={{marginRight: '10px'}}
+                                    type="edit" key="edit"/>
+                              Cập nhật thông tin
+                        </span>
                   ]}>
         <Meta
             title={user.fullName}

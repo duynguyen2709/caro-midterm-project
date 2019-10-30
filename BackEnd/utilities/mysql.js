@@ -12,12 +12,15 @@ nodeCleanup(function (exitCode, signal) {
 });
 
 module.exports.initConnection = async () => {
-    conn = await mysql.createConnection({
+    conn = await mysql.createPool({
         host: "167.179.80.90",
         user: "1612145",
         password: "1612145",
         database: "AdvancedWebDevelopment",
-        charset: "utf8_general_ci"
+        charset: "utf8_general_ci",
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0
     });
 };
 
