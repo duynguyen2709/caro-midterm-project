@@ -160,3 +160,19 @@ module.exports.updateUserInfo = async (username, avatar, email, fullName) => {
 
     return res;
 };
+
+
+module.exports.changePassword = async (username, password) => {
+    const hash = bcrypt.hashSync(password, 8);
+
+    let query = `UPDATE User SET password = '${hash}' where username = '${username}'`;
+    const [res, f] = await conn.getConnection()
+        .query(query).then(([rows, fields]) => {
+            return [rows, fields];
+        }).catch((err) => {
+            console.error(err.message);
+            return [null, null];
+        });
+
+    return res;
+};

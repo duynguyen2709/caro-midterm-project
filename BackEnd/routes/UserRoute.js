@@ -13,6 +13,8 @@ const multer = Multer({
 
 router.post('/user/register', UserController.registerUser);
 
+router.post('/user/changepassword', UserController.changePassword);
+
 router.post('/user/login', function (req, res, next) {
     passport.authenticate('local', {
         session: false

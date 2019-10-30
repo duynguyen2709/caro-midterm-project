@@ -89,7 +89,6 @@ export const login = (username, password) => {
                     return dispatch(getUser());
                 }
                 return dispatch(setErrorText(data.message));
-
             }).catch(() => dispatch(setErrorText(SYSTEM_ERROR)));
     };
 };
@@ -159,4 +158,26 @@ export const updateUserInfo = (userData) => {
                 return dispatch(setErrorText(data.message));
             }).catch(() => dispatch(setErrorText(SYSTEM_ERROR)));
     }
+};
+
+export const changePassword = (password) => {
+    return (dispatch, getState) => {
+
+        const {username} = getState().api.user;
+
+        dispatch(editingStart());
+
+        return axios.post(`${process.env.REACT_APP_BACKEND_URL}user/changepassword`, {
+            username,
+            password
+        }, {
+            timeout: 5000
+        }).then(data => data.data)
+            .then(data => {
+                if (data.returnCode === 1) {
+                    return dispatch(login(username, password));
+                }
+                return dispatch(setErrorText(data.message));
+            }).catch(() => dispatch(setErrorText(SYSTEM_ERROR)));
+    };
 };

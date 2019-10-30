@@ -27,6 +27,22 @@ exports.registerUser = async function (req, res, next) {
     }
 };
 
+exports.changePassword = async function(req,res) {
+    const {username, password} = req.body;
+    const result = await userModel.changePassword(username, password);
+    if (result != null && result.affectedRows === 1){
+        res.json({
+            returnCode: 1,
+            message: "Cập Nhật Thành Công."
+        });
+    } else {
+        res.json({
+            returnCode: 0,
+            message: "Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau."
+        });
+    }
+};
+
 exports.updateUserInfo = async function (req, res) {
     let avatar = req.body.avatar;
     const {username, email, fullName} = req.body;

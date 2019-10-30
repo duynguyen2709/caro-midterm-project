@@ -3,7 +3,6 @@ import ReactCardFlip from 'react-card-flip';
 import React, {useCallback, useEffect, useState} from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
-import Error from "../utils/Error";
 import ProfileCard from "./ProfileCard";
 import EditProfileCard from "./EditProfileCard";
 import PlayButtons from "./PlayButtons";
@@ -18,13 +17,10 @@ const MainPage = ({errorText, user, isEditing}) => {
     }, []);
 
     useEffect(() => {
-        if (!isEditing && flip)
+        if (errorText === '' && !isEditing && flip)
             toggleFlip();
     // eslint-disable-next-line
-    }, [isEditing]);
-
-    if (errorText != null && errorText !== '')
-        return <Error/>;
+    }, [isEditing, errorText]);
 
     return (
         <>
@@ -40,6 +36,7 @@ const MainPage = ({errorText, user, isEditing}) => {
                                      onClickEdit={toggleFlip}/>
 
                         <EditProfileCard key="back"
+                                         errorText={errorText}
                                          user={user}
                                          onClickCancel={toggleFlip}/>
                     </ReactCardFlip>

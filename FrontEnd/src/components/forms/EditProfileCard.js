@@ -1,11 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {Card} from "antd";
 import ChangePasswordForm from "./ChangePasswordForm";
 import UpdateInfoForm from "./UpdateInfoForm";
 
-const EditProfileCard = React.memo(({user, onClickCancel}) => {
+const EditProfileCard = React.memo(({errorText, user, onClickCancel}) => {
     const [avatar, setAvatar] = useState(user.avatar);
     const [isChangePassword, setIsChangePassword] = useState(false);
+
+    const cancelChangePassword = useCallback(() => {
+        setIsChangePassword(false);
+        onClickCancel();
+    },[onClickCancel]);
 
     return (<Card hoverable
                   className="box-shadow"
@@ -18,7 +23,9 @@ const EditProfileCard = React.memo(({user, onClickCancel}) => {
                   }>
 
         {isChangePassword ?
-            <ChangePasswordForm/> :
+            <ChangePasswordForm errorText={errorText}
+                                onClickCancel={cancelChangePassword}/> :
+
             <UpdateInfoForm user={user}
                             onClickCancel={onClickCancel}
                             setAvatar={setAvatar}

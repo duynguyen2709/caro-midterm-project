@@ -19,6 +19,7 @@ export const ActionConstant = {
     LOGIN_SUCCESS: "LOGIN_SUCCESS",
     LOGOUT: "LOGOUT",
     UPDATE_INFO: "UPDATE_INFO",
+    CHANGE_PASSWORD: "CHANGE_PASSWORD",
 };
 
 export const SYSTEM_ERROR = "Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau";

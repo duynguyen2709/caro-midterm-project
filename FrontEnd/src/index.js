@@ -10,7 +10,7 @@ import rootReducer from './reducers/RootReducer';
 import apiReducer from './reducers/ApiReducer';
 
 import './index.css';
-import MainRoute from "./routers/MainRoute";
+import AppWrapper from "./utils/AppWrapper";
 
 const reducers = combineReducers({
     root: rootReducer,
@@ -25,6 +25,6 @@ if (process.env.NODE_ENV !== 'production') {
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(<Provider store={store}>
-        <MainRoute/>
+        <AppWrapper/>
     </Provider>,
     document.getElementById('root'));

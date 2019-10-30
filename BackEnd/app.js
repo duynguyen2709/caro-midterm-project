@@ -36,6 +36,13 @@ app.use(passport.initialize());
 app.use('/', userRouter);
 app.use('/auth', authenRouter);
 
+
+app.get('/status', (req, res) => {
+    res.status(200).json({
+        returnCode: 1
+    })
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
