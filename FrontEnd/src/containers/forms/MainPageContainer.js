@@ -1,15 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom'
-import {getUser} from "../../actions/ApiActions";
+import {getUser, logout} from "../../actions/ApiActions";
 import Loading from "../../components/utils/Loading";
 import MainPage from "../../components/forms/MainPage";
 
 function MainPageContainer(props) {
     const token = localStorage.getItem("token");
 
-    if (token == null || token === '')
+    if (token == null || token === '') {
+        props.logout();
         return <Redirect to="/login"/>;
+    }
 
     if (props.user == null) {
         props.getUser();
@@ -32,6 +34,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         getUser: () => dispatch(getUser()),
+        logout: () => dispatch(logout()),
     };
 }
 
