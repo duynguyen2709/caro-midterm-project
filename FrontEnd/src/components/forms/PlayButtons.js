@@ -23,7 +23,7 @@ const PlayButtons = React.memo(() => {
             size="large"
             block
             className="horizontal-center button-shadow"
-            onClick={() => history.push("/game")}
+            onClick={() => history.push("/onlinegame")}
         >
             Chơi Online
         </Button>
@@ -35,7 +35,7 @@ const PlayButtons = React.memo(() => {
             size="large"
             block
             className="horizontal-center button-shadow"
-            onClick={() => history.push("/game")}
+            onClick={() => history.push("/offlinegame")}
         >
             Chơi Với Máy
         </Button>
@@ -53,5 +53,5 @@ const PlayButtons = React.memo(() => {
         </Button>
     </>)
 });
-
+PlayButtons.whyDidYouRender = true;
 export default PlayButtons;

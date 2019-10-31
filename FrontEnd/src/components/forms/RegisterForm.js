@@ -110,5 +110,5 @@ const RegisterForm = ({errorText, isLoading, onClickRegister}) => {
         </Row>
     </>
 };
-
+RegisterForm.whyDidYouRender = true;
 export default RegisterForm;

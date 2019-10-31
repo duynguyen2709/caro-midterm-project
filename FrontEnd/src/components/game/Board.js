@@ -12,5 +12,5 @@ const Board = ({row, column, squares, handleOnClickSquare}) => {
                         onClick={() => handleOnClickSquare(r, c)}/>)}
         </div>));
 };
-
+Board.whyDidYouRender = true;
 export default Board;

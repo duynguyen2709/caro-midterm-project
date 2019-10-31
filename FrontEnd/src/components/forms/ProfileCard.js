@@ -47,5 +47,5 @@ const ProfileCard = React.memo(({user, onClickEdit}) => {
         />
     </Card>)
 });
-
+ProfileCard.whyDidYouRender = true;
 export default ProfileCard;

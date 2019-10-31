@@ -55,6 +55,5 @@ const LoginButtons = ({onClickLogin}) => {
         </Button>
     </div>)
 };
-
-
+LoginButtons.whyDidYouRender = true;
 export default LoginButtons;

@@ -77,5 +77,5 @@ const LoginForm = ({errorText, isLoading}) => {
         </Row>
     </>
 };
-
+LoginForm.whyDidYouRender = true;
 export default LoginForm;

@@ -8,5 +8,5 @@ const RestartButton = React.memo(({onClick}) => {
         </button>
     </div>;
 });
-
+RestartButton.whyDidYouRender = true;
 export default RestartButton;

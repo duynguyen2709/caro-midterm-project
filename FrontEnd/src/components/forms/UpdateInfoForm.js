@@ -82,5 +82,5 @@ const UpdateInfoForm = ({user, onClickCancel, setAvatar, setIsChangePassword}) =
         </Button>
     </>)
 };
-
+UpdateInfoForm.whyDidYouRender = true;
 export default UpdateInfoForm;

@@ -88,5 +88,5 @@ const ChangePasswordForm = ({errorText, onClickCancel}) => {
         </Button>
     </>)
 };
-
+ChangePasswordForm.whyDidYouRender = true;
 export default ChangePasswordForm;

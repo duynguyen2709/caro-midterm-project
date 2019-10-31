@@ -138,6 +138,7 @@ export const loginWithGoogle = () => {
             }
             return null;
         });
+
         return null;
     };
 };

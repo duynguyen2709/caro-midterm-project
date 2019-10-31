@@ -2,7 +2,8 @@ import React from 'react';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import LoginContainer from "../containers/forms/LoginContainer";
 import RegisterContainer from "../containers/forms/RegisterContainer";
-import GameContainer from "../containers/game/GameContainer";
+import OfflineGameContainer from "../containers/game/OfflineGameContainer";
+import OnlineGameContainer from "../containers/game/OnlineGameContainer";
 import MainPageContainer from "../containers/forms/MainPageContainer";
 
 export default function MainRoute() {
@@ -15,8 +16,11 @@ export default function MainRoute() {
                 <Route path="/register">
                     <RegisterContainer/>
                 </Route>
-                <Route path="/game">
-                    <GameContainer/>
+                <Route path="/onlinegame">
+                    <OnlineGameContainer/>
+                </Route>
+                <Route path="/offlinegame">
+                    <OfflineGameContainer/>
                 </Route>
                 <Route path="/">
                     <MainPageContainer/>

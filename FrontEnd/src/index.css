@@ -70,7 +70,6 @@ ol, ul {
 .game-board {
   border: 3px solid #766928;
   padding-right: 1px;
-  margin-bottom: 5px;
 }
 
 .game-info {
@@ -232,4 +231,16 @@ ol, ul {
   bottom: 0;
   top: 0;
   background-color: rgba(0,0,0,0.6);
+}
+
+.button-online {
+  height: 35px;
+  font-size: 16px;
+}
+
+.game-info-section {
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

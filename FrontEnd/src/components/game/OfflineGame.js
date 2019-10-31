@@ -6,7 +6,8 @@ import {isBoardFull, resetColor} from '../../utils/GameCheckUtil';
 import MoveHistoryContainer from '../../containers/game/MoveHistoryContainer';
 import Board from './Board';
 
-class Game extends React.Component {
+class OfflineGame extends React.Component {
+    static whyDidYouRender = true;
 
     constructor(props) {
         super(props);
@@ -99,4 +100,4 @@ class Game extends React.Component {
     }
 }
 
-export default Game;
+export default OfflineGame;

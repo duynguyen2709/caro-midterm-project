@@ -49,5 +49,5 @@ const MainPage = ({errorText, user, isEditing}) => {
             </Row>
         </>)
 };
-
+MainPage.whyDidYouRender = true;
 export default MainPage;

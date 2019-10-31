@@ -16,4 +16,5 @@ const Square = React.memo(({id, value, onClick}) => {
     return (prevProps.id === nextProps.id && prevProps.value === nextProps.value);
 });
 
+Square.whyDidYouRender = true;
 export default Square;

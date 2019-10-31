@@ -1,5 +1,5 @@
 import $ from "jquery";
-import {Button, Table} from 'antd';
+import {Table} from 'antd';
 import React from "react";
 import '../../index.css';
 
@@ -61,30 +61,11 @@ export default class MoveHistoryTable extends React.Component {
                 dataIndex: 'column',
                 sorter: (a, b) => a.column - b.column,
                 sortDirections: ['descend', 'ascend'],
-            },
-            {
-                title: 'Reset',
-                // eslint-disable-next-line no-unused-vars
-                render: (text, record, index) => {
-                    return <Button type="primary"
-                                   shape="circle"
-                                   size="small"
-                                   style={{
-                                       fontSize: '17px'
-                                   }}
-                                   onClick={() => this.props.resetTable(record)}
-                    >
-                        {'\u21BB'}
-                    </Button>;
-                }
-            },
+            }
         ];
 
         return (
             <div className="move-history">
-                <p style={{margin: '20px auto', fontSize: '30px'}}>
-                    Danh sách nước đi
-                </p>
 
                 <Table columns={columns}
                        dataSource={this.props.data}
