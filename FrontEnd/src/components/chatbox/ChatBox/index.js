@@ -1,15 +1,15 @@
 import React from 'react';
 import MessageList from '../MessageList';
-import './Messenger.css';
+import './ChatBox.css';
 import Compose from "../Compose";
 
 export default function ChatBox() {
     return (
-        <div>
-            <div className="messenger scrollable content">
+        <>
+            <div className="messenger scrollable content" id="scrollable">
                 <MessageList/>
             </div>
             <Compose/>
-        </div>
+        </>
     );
 }

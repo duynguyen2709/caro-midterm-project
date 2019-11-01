@@ -1,7 +1,7 @@
 import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
 import React from 'react';
-import RegisterForm from '../../components/forms/RegisterForm';
+import RegisterPage from '../../components/views/RegisterPage';
 import {register, setErrorText} from "../../actions/ApiActions";
 
 function RegisterContainer(props) {
@@ -23,7 +23,7 @@ function RegisterContainer(props) {
         props.register(user);
     }
 
-    return <RegisterForm errorText={props.errorText}
+    return <RegisterPage errorText={props.errorText}
                          isLoading={props.isLoading}
                          onClickRegister={validateInfo}/>
 }

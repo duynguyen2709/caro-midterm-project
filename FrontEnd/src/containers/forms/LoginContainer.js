@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom'
-import LoginPage from "../../components/forms/LoginForm";
+import LoginPage from "../../components/views/LoginPage";
 
 function LoginContainer(props) {
     const token = localStorage.getItem("token");

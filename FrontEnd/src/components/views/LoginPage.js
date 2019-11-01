@@ -3,11 +3,11 @@ import React, {useCallback, useState} from 'react';
 import {useDispatch} from "react-redux";
 import 'antd/dist/antd.css';
 import '../../index.css';
-import LoginButtons from "./LoginButtons";
+import LoginButtons from "../forms/LoginButtons";
 import LoadingModal from "../../utils/LoadingModal";
 import {login} from "../../actions/ApiActions";
 
-const LoginForm = ({errorText, isLoading}) => {
+const LoginPage = ({errorText, isLoading}) => {
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
@@ -77,5 +77,5 @@ const LoginForm = ({errorText, isLoading}) => {
         </Row>
     </>
 };
-LoginForm.whyDidYouRender = true;
-export default LoginForm;
+LoginPage.whyDidYouRender = true;
+export default LoginPage;

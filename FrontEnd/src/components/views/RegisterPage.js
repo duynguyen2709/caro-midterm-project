@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import LoadingModal from "../../utils/LoadingModal";
 
-const RegisterForm = ({errorText, isLoading, onClickRegister}) => {
+const RegisterPage = ({errorText, isLoading, onClickRegister}) => {
 
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -110,5 +110,5 @@ const RegisterForm = ({errorText, isLoading, onClickRegister}) => {
         </Row>
     </>
 };
-RegisterForm.whyDidYouRender = true;
-export default RegisterForm;
+RegisterPage.whyDidYouRender = true;
+export default RegisterPage;

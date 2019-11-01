@@ -2,6 +2,7 @@
   height: 400px;
   display: flex;
   flex-direction: column;
+  border-top: 2px solid #c1a073;
 }
 
 .scrollable {

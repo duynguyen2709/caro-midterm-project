@@ -2,9 +2,9 @@ import {Button} from "antd";
 import React from 'react';
 import '../../index.css';
 import {isBoardFull, resetColor} from '../../utils/GameCheckUtil';
-import Board from './Board';
-import OnlineGameButtons from "./OnlineGameButtons";
-import TabsWrapper from "./TabsWrapper";
+import Board from '../game/Board';
+import OnlineGameButtons from "../game/OnlineGameButtons";
+import TabsWrapper from "../game/TabsWrapper";
 
 class OnlineGame extends React.Component {
 

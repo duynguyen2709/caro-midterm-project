@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom'
 import {getUser, logout} from "../../actions/ApiActions";
 import Loading from "../../components/utils/Loading";
-import MainPage from "../../components/forms/MainPage";
+import MainPage from "../../components/views/MainPage";
 
 function MainPageContainer(props) {
     const token = localStorage.getItem("token");

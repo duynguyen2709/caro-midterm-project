@@ -3,9 +3,9 @@ import ReactCardFlip from 'react-card-flip';
 import React, {useCallback, useEffect, useState} from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
-import ProfileCard from "./ProfileCard";
-import EditProfileCard from "./EditProfileCard";
-import PlayButtons from "./PlayButtons";
+import ProfileCard from "../forms/ProfileCard";
+import EditProfileCard from "../forms/EditProfileCard";
+import PlayButtons from "../forms/PlayButtons";
 import LoadingModal from "../../utils/LoadingModal";
 
 const MainPage = ({errorText, user, isEditing}) => {
@@ -19,7 +19,7 @@ const MainPage = ({errorText, user, isEditing}) => {
     useEffect(() => {
         if (errorText === '' && !isEditing && flip)
             toggleFlip();
-    // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [isEditing, errorText]);
 
     return (
@@ -43,7 +43,7 @@ const MainPage = ({errorText, user, isEditing}) => {
                 </Col>
 
                 <Col style={{margin: 'auto 50px', width: '200px'}}>
-                    <PlayButtons />
+                    <PlayButtons/>
                 </Col>
 
             </Row>

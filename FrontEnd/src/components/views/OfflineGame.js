@@ -1,10 +1,10 @@
 import {Button} from "antd";
 import React from 'react';
 import '../../index.css';
-import RestartButton from './RestartButton';
+import RestartButton from '../game/RestartButton';
 import {isBoardFull, resetColor} from '../../utils/GameCheckUtil';
 import MoveHistoryContainer from '../../containers/game/MoveHistoryContainer';
-import Board from './Board';
+import Board from '../game/Board';
 
 class OfflineGame extends React.Component {
     static whyDidYouRender = true;
