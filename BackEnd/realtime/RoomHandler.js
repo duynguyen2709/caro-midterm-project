@@ -1,4 +1,5 @@
 const redis = require('../utilities/redis');
+const GameHandler = require('./GameHandler');
 
 module.exports.findPlayer = (io, socket, data) => {
     if (!data){
@@ -27,6 +28,8 @@ module.exports.findPlayer = (io, socket, data) => {
             });
 
             redis.del("ROOM");
+
+            GameHandler.initGame(roomEntity.roomID);
 
         } else {
             const roomID = new Date().getTime();

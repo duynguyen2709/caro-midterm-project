@@ -3,7 +3,7 @@ import {Table} from 'antd';
 import React from "react";
 import '../../index.css';
 
-export default class MoveHistoryTable extends React.Component {
+export default class OnlineMoveHistoryTable extends React.Component {
 
     componentDidMount() {
         $('table').attr('id', 'historyTable');
@@ -11,6 +11,7 @@ export default class MoveHistoryTable extends React.Component {
 
     // eslint-disable-next-line no-unused-vars
     componentDidUpdate(prevProps, prevState, snapshot) {
+        const currentRow = this.props.totalChecked - 1;
         const rows = document.getElementsByClassName('ant-table-row');
         if (rows == null || rows.length === 0)
             return;
@@ -23,9 +24,9 @@ export default class MoveHistoryTable extends React.Component {
             }));
         }
 
-        rows[this.props.currentSelected].style.backgroundColor = '#ffb35f';
+        rows[currentRow].style.backgroundColor = '#ffb35f';
         for (let i = 0; i < rows.length; i++) {
-            if (i !== this.props.currentSelected &&
+            if (i !== currentRow &&
                 rows[i].style.backgroundColor.toString() !== 'rgb(252, 205, 142)') {
                 rows[i].style.backgroundColor = '#fccd8e';
             }
@@ -33,6 +34,9 @@ export default class MoveHistoryTable extends React.Component {
     }
 
     render() {
+        const Xtext = (this.props.mySymbol === 'X') ? "X (Bạn)" : "X (Đối thủ)";
+        const Otext = (this.props.mySymbol === 'X') ? "O (Đối thủ)" : "O (Bạn)";
+
         const columns = [
             {
                 title: 'Lượt',
@@ -46,7 +50,7 @@ export default class MoveHistoryTable extends React.Component {
                 render: (text) => {
                     return (<span className='number'
                                   style={{color: text === 'X' ? 'blue' : 'red'}}>
-                               {(text === 'X') ? "X (Người)" : "O (Máy)"}
+                               {(text === 'X') ? Xtext : Otext}
                         </span>)
                 }
             },
@@ -76,14 +80,6 @@ export default class MoveHistoryTable extends React.Component {
                        style={{
                            height: '400px',
                            border: '2px solid #9a7b59'
-                       }}
-                       onRow={(record, rowIndex) => {
-                           return {
-                               // eslint-disable-next-line no-unused-vars
-                               onClick: event => {
-                                   this.props.setCurrentSelected(rowIndex)
-                               }
-                           };
                        }}
                 />
             </div>);

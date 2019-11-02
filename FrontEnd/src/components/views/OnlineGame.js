@@ -1,10 +1,11 @@
-import {Button} from "antd";
 import React from 'react';
 import '../../index.css';
 import {isBoardFull} from '../../utils/GameCheckUtil';
 import Board from '../game/Board';
 import OnlineGameButtons from "../game/OnlineGameButtons";
 import TabsWrapper from "../game/TabsWrapper";
+import OnlineGameHeader from "../forms/OnlineGameHeader";
+import {BASE_COL, BASE_ROW} from "../../utils/Constants";
 
 class OnlineGame extends React.Component {
 
@@ -13,8 +14,6 @@ class OnlineGame extends React.Component {
 
         this.handleOnClickSquare = this.handleOnClickSquare.bind(this);
         this.getStatus = this.getStatus.bind(this);
-
-        props.initBoard();
     }
 
     getStatus() {
@@ -32,41 +31,25 @@ class OnlineGame extends React.Component {
     }
 
     handleOnClickSquare(i, j) {
-        if (this.props.squares[i][j] != null || this.props.win) {
+        if (this.props.squares[i][j] != null || this.props.win || !this.props.isMyTurn) {
             return;
         }
         this.props.onClickSquare(i, j);
-
-        setTimeout(() => {
-            if (!this.props.win) {
-                let randI = Math.floor(Math.random() * 20);
-                let randJ = Math.floor(Math.random() * 20);
-
-                while (this.props.squares[randI][randJ] != null) {
-                    randI = Math.floor(Math.random() * 20);
-                    randJ = Math.floor(Math.random() * 20);
-                }
-                this.props.onClickSquare(randI, randJ);
-            }
-        }, 100);
-
     }
 
     render() {
         return (
             <div className="container">
 
-                <Button style={{width: 'fit-content', fontWeight: 'bold'}}
-                        type="primary"
-                        icon="caret-left"
-                        onClick={this.props.leaveRoom}>
-                    Thoát
-                </Button>
+                <OnlineGameHeader leaveRoom={this.props.leaveRoom}
+                                  roomID={this.props.roomID}
+                                  otherPlayerName="123"
+                />
 
                 <div className="game">
                     <div className="game-board">
-                        <Board row={this.props.BASE_ROW}
-                               column={this.props.BASE_COL}
+                        <Board row={BASE_ROW}
+                               column={BASE_COL}
                                squares={this.props.squares}
                                handleOnClickSquare={this.handleOnClickSquare}/>
                     </div>

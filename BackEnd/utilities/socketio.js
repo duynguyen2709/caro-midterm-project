@@ -1,5 +1,6 @@
 const sockIO = require('../app').sockIO;
 const RoomHandler = require('../realtime/RoomHandler');
+const GameHandler = require('../realtime/GameHandler');
 
 sockIO.on('connection', function (socket) {
 
@@ -9,6 +10,10 @@ sockIO.on('connection', function (socket) {
 
     socket.on('leaveRoom', function (data) {
         RoomHandler.kickRoom(sockIO, socket, data);
+    });
+
+    socket.on('playTurn', function (data) {
+        GameHandler.playTurn(sockIO, data);
     });
 
     /**

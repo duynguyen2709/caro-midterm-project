@@ -12,3 +12,10 @@ export const leaveRoom = () => {
         type: ActionConstant.LEAVE_ROOM,
     }
 };
+
+export const onNewTurnPlayed = (data) => {
+    return {
+        type: ActionConstant.NEW_TURN_PLAYED,
+        data
+    }
+};
