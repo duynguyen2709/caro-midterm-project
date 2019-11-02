@@ -5,7 +5,7 @@ import ChatBox from '../chatbox/ChatBox/index';
 
 const {TabPane} = Tabs;
 
-const TabsWrapper = () => {
+const TabsWrapper = (props) => {
     return (<div style={{
         margin: '0 50px',
         textAlign: 'center',
@@ -34,7 +34,7 @@ const TabsWrapper = () => {
                             Trò chuyện
                          </span>
                      }>
-                <ChatBox/>
+                <ChatBox sendMessage={props.sendMessage}/>
             </TabPane>
         </Tabs>
     </div>)

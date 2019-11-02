@@ -16,6 +16,10 @@ sockIO.on('connection', function (socket) {
         GameHandler.playTurn(sockIO, data);
     });
 
+    socket.on('sendMessage', function (data) {
+        GameHandler.sendMessage(sockIO, data);
+    });
+
     /**
      * Connect the Player 2 to the room he requested. Show error if room full.
      */

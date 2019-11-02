@@ -1,15 +1,15 @@
 import React from 'react';
-import MessageList from '../MessageList';
 import './ChatBox.css';
+import MessageListContainer from '../../../containers/utils/MessageListContainer';
 import Compose from "../Compose";
 
-export default function ChatBox() {
+export default function ChatBox({sendMessage}) {
     return (
         <>
             <div className="messenger scrollable content" id="scrollable">
-                <MessageList/>
+                <MessageListContainer />
             </div>
-            <Compose/>
+            <Compose sendMessage={sendMessage}/>
         </>
     );
 }

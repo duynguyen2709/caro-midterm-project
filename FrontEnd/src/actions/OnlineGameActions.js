@@ -19,3 +19,10 @@ export const onNewTurnPlayed = (data) => {
         data
     }
 };
+
+export const onNewMessage = (messages) => {
+    return {
+        type: ActionConstant.NEW_MESSAGE,
+        messages
+    }
+};

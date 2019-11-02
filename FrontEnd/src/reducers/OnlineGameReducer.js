@@ -9,6 +9,11 @@ const initialState = {
     isMyTurn: true,
     isPlayer1: true,
     totalChecked: 0,
+
+    win: false,
+    winPlayer: '',
+
+    messages: []
 };
 
 export default function onlineGameReducer(state = initialState, action) {
@@ -35,9 +40,16 @@ export default function onlineGameReducer(state = initialState, action) {
                 historyMoves: action.data.historyMoves,
                 totalChecked: action.data.totalChecked,
                 isMyTurn: (action.data.isXNext && state.mySymbol === 'X') ||
-                    (!action.data.isXNext && state.mySymbol === 'O')
+                    (!action.data.isXNext && state.mySymbol === 'O'),
+                win: action.data.win,
+                winPlayer: action.data.winPlayer,
             };
 
+        case ActionConstant.NEW_MESSAGE:
+            return {
+                ...state,
+                messages: action.messages
+            };
         default :
             return state;
     }

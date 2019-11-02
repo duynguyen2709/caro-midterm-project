@@ -4,8 +4,9 @@ import {connect} from 'react-redux';
 import io from "socket.io-client";
 import OnlineGame from '../../components/views/OnlineGame';
 import FindingPlayer from "../../components/views/FindingPlayer";
-import {joinNewGame, leaveRoom, onNewTurnPlayed} from "../../actions/OnlineGameActions";
+import {joinNewGame, leaveRoom, onNewTurnPlayed, onNewMessage} from "../../actions/OnlineGameActions";
 import {ModalOutRoom} from "../../components/utils/Modals";
+import {highlight} from "../../utils/GameCheckUtil";
 
 class OnlineGameContainer extends React.Component {
 
@@ -19,6 +20,7 @@ class OnlineGameContainer extends React.Component {
 
         this.handleLeaveRoom = this.handleLeaveRoom.bind(this);
         this.handleOnClickSquare = this.handleOnClickSquare.bind(this);
+        this.handleSendMessage = this.handleSendMessage.bind(this);
     }
 
     componentDidMount() {
@@ -41,7 +43,16 @@ class OnlineGameContainer extends React.Component {
             ModalOutRoom(this.handleLeaveRoom);
         });
 
-        this.socket.on('newTurn', (data) => this.props.onNewTurnPlayed(data));
+        this.socket.on('newTurn', (data) => {
+            if (data.win) {
+                highlight(data.winArray, data.winPlayer);
+            }
+            this.props.onNewTurnPlayed(data)
+        });
+
+        this.socket.on('newMessage', (data) => {
+            this.props.onNewMessage(data);
+        })
     }
 
     componentWillUnmount() {
@@ -64,6 +75,15 @@ class OnlineGameContainer extends React.Component {
         })
     }
 
+    handleSendMessage(message) {
+        this.socket.emit('sendMessage', {
+            roomID: this.props.roomID,
+            username: this.props.user.username,
+            message,
+            timestamp: new Date().getTime()
+        })
+    }
+
     render() {
 
         const {findingPlayer} = this.state;
@@ -72,6 +92,7 @@ class OnlineGameContainer extends React.Component {
             return <FindingPlayer/>;
 
         return <OnlineGame {...this.props}
+                           sendMessage={this.handleSendMessage}
                            onClickSquare={this.handleOnClickSquare}
                            leaveRoom={this.handleLeaveRoom}/>;
 
@@ -89,6 +110,8 @@ function mapStateToProps(state) {
         squares: state.online.squares,
         totalChecked: state.online.totalChecked,
         win: state.online.win,
+        winPlayer: state.online.winPlayer,
+        mySymbol: state.online.mySymbol
     };
 }
 
@@ -97,7 +120,8 @@ function mapDispatchToProps(dispatch) {
         // online
         joinNewGame: (room) => dispatch(joinNewGame(room)),
         leaveRoom: () => dispatch(leaveRoom()),
-        onNewTurnPlayed: (data) => dispatch(onNewTurnPlayed(data))
+        onNewTurnPlayed: (data) => dispatch(onNewTurnPlayed(data)),
+        onNewMessage: (data) => dispatch(onNewMessage(data)),
     };
 }
 

@@ -31,10 +31,21 @@
 }
 
 .compose .toolbar-button {
-  color: #bbbbbf;
+  color: #a9a9ad;
   margin-left: 15px;
 }
 
 .compose .toolbar-button:hover {
   color: #99999c;
+}
+
+.send-button {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
 }

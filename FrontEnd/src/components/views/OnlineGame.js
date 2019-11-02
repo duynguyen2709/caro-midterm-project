@@ -17,13 +17,17 @@ class OnlineGame extends React.Component {
     }
 
     getStatus() {
-        const currentSymbol = this.props.isXNext ? 'O' : 'X';
         const turn = this.props.isMyTurn ? 'Lượt của bạn' : 'Lượt của đối thủ';
 
         let text = <p className="game-info">{turn}</p>;
 
         if (this.props.win) {
-            text = <p className="game-info" style={{color: 'red'}}>Người thắng: {currentSymbol}</p>;
+            if (this.props.winPlayer === this.props.mySymbol){
+                text = <p className="game-info" style={{color: 'red'}}>Bạn Đã Thắng</p>;
+            } else {
+                text = <p className="game-info" style={{color: 'red'}}>Bạn Đã Thua</p>;
+
+            }
         } else if (isBoardFull(this.props.totalChecked)) {
             text = <p className="game-info">Hoà !</p>;
         }
@@ -59,7 +63,7 @@ class OnlineGame extends React.Component {
 
                         <OnlineGameButtons/>
 
-                        <TabsWrapper/>
+                        <TabsWrapper sendMessage={this.props.sendMessage}/>
                     </div>
                 </div>
             </div>

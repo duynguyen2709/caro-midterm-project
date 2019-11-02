@@ -28,6 +28,7 @@ export const ActionConstant = {
     JOIN_NEW_GAME: "JOIN_NEW_GAME",
     LEAVE_ROOM: "LEAVE_ROOM",
     NEW_TURN_PLAYED: "NEW_TURN_PLAYED",
+    NEW_MESSAGE: "NEW_MESSAGE",
 };
 
 export const SYSTEM_ERROR = "Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau";

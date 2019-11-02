@@ -1,26 +1,8 @@
-import {NO_OF_COL, NO_OF_ROW, NUM_TO_WIN} from "./Constants";
+const NO_OF_COL = 20;
+const NO_OF_ROW = 20;
+const NUM_TO_WIN = 5;
 
-function highlight(arr, currentSymbol) {
-    let color = null;
-    if (currentSymbol === "X")
-        color = "#fd4138";
-    else
-        color = "#000000";
-
-    for (let i = 0; i < arr.length; i++) {
-        const key = `${arr[i].row}_${arr[i].col}`;
-        document.getElementById(key).style.backgroundColor = color;
-    }
-}
-
-function resetColor() {
-    const cells = document.getElementsByClassName('square');
-
-    for (let i = 0; i < cells.length; i++)
-        cells[i].style.backgroundColor = '#eff1bc';
-}
-
-function checkWinCondition(squares, i, j) {
+module.exports.checkWinCondition = (squares, i, j) => {
 
     const currentSymbol = squares[i][j];
 
@@ -267,33 +249,36 @@ function checkWinCondition(squares, i, j) {
 
     const nRow = checkRow();
     if (nRow != null) {
-        highlight(nRow, currentSymbol);
-        return currentSymbol;
+        return {
+            winArray: nRow,
+            currentSymbol
+        };
     }
 
     const nCol = checkColumn();
     if (nCol != null) {
-        highlight(nCol, currentSymbol);
-        return currentSymbol;
+        return {
+            winArray: nCol,
+            currentSymbol
+        };
+
     }
 
     const nDiag = checkDiag();
     if (nDiag != null) {
-        highlight(nDiag, currentSymbol);
-        return currentSymbol;
+        return {
+            winArray: nDiag,
+            currentSymbol
+        };
     }
 
     const nAntiDiag = checkAntiDiag();
     if (nAntiDiag != null) {
-        highlight(nAntiDiag, currentSymbol);
-        return currentSymbol;
+        return {
+            winArray: nAntiDiag,
+            currentSymbol
+        };
     }
 
     return null;
 }
-
-function isBoardFull(totalChecked) {
-    return totalChecked >= NO_OF_ROW * NO_OF_COL;
-}
-
-export {checkWinCondition, resetColor, isBoardFull, highlight};
