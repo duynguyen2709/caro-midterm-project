@@ -1,6 +1,33 @@
 const conn = require('../utilities/mysql');
 const bcrypt = require('bcryptjs');
 
+module.exports.getAllUser = async () => {
+    const [res, f] = await conn.getConnection()
+        .query('SELECT * FROM User')
+        .then(([rows, fields]) => {
+            return [rows, fields];
+        })
+        .catch(err => {
+            console.error(err.message);
+            return [null, null];
+        });
+
+    if (!res)
+        return null;
+
+    return res.map(c => {
+        return {
+            username: c.username,
+            password: c.password,
+            fullName: c.fullName,
+            email: c.email,
+            avatar: c.avatar,
+            facebookID: c.facebookID,
+            googleID: c.googleID
+        };
+    });
+};
+
 module.exports.getUser = async (username) => {
     const [res, f] = await conn.getConnection()
         .query('SELECT * FROM User WHERE username = ?', [username])
@@ -21,9 +48,10 @@ module.exports.getUser = async (username) => {
         fullName: res[0].fullName,
         email: res[0].email,
         avatar: res[0].avatar,
+        facebookID: res[0].facebookID,
+        googleID: res[0].googleID
     };
 };
-
 
 module.exports.findByFacebookID = async (facebookID) => {
     const [res, f] = await conn.getConnection()
@@ -45,6 +73,8 @@ module.exports.findByFacebookID = async (facebookID) => {
         fullName: res[0].fullName,
         email: res[0].email,
         avatar: res[0].avatar,
+        facebookID: res[0].facebookID,
+        googleID: res[0].googleID
     };
 };
 
@@ -67,6 +97,9 @@ module.exports.findByGoogleID = async (googleID) => {
         password: res[0].password,
         fullName: res[0].fullName,
         email: res[0].email,
+        avatar: res[0].avatar,
+        facebookID: res[0].facebookID,
+        googleID: res[0].googleID
     };
 };
 
@@ -90,6 +123,8 @@ module.exports.findByEmail = async (email) => {
         fullName: res[0].fullName,
         email: res[0].email,
         avatar: res[0].avatar,
+        facebookID: res[0].facebookID,
+        googleID: res[0].googleID
     };
 };
 
@@ -117,7 +152,6 @@ module.exports.createUser = async (user) => {
     return res;
 };
 
-
 module.exports.updateFacebookID = async (username, facebookID) => {
 
     let query = `UPDATE User SET facebookID = '${facebookID}' where username = '${username}'`;
@@ -131,7 +165,6 @@ module.exports.updateFacebookID = async (username, facebookID) => {
 
     return res;
 };
-
 
 module.exports.updateGoogleID = async (username, googleID) => {
 
@@ -160,7 +193,6 @@ module.exports.updateUserInfo = async (username, avatar, email, fullName) => {
 
     return res;
 };
-
 
 module.exports.changePassword = async (username, password) => {
     const hash = bcrypt.hashSync(password, 8);

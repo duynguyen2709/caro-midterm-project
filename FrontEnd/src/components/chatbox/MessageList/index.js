@@ -73,6 +73,7 @@ export default function MessageList() {
             // },
         ];
         setMessages([...messages, ...tempMessages])
+        // eslint-disable-next-line
     },[]);
 
     useEffect(() => {

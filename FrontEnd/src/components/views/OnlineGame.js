@@ -1,7 +1,7 @@
 import {Button} from "antd";
 import React from 'react';
 import '../../index.css';
-import {isBoardFull, resetColor} from '../../utils/GameCheckUtil';
+import {isBoardFull} from '../../utils/GameCheckUtil';
 import Board from '../game/Board';
 import OnlineGameButtons from "../game/OnlineGameButtons";
 import TabsWrapper from "../game/TabsWrapper";
@@ -11,19 +11,17 @@ class OnlineGame extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleClickRestartButton = this.handleClickRestartButton.bind(this);
         this.handleOnClickSquare = this.handleOnClickSquare.bind(this);
         this.getStatus = this.getStatus.bind(this);
-        this.goBack = this.goBack.bind(this);
 
         props.initBoard();
     }
 
     getStatus() {
         const currentSymbol = this.props.isXNext ? 'O' : 'X';
-        const nextSymbol = this.props.isXNext ? 'X' : 'O';
+        const turn = this.props.isMyTurn ? 'Lượt của bạn' : 'Lượt của đối thủ';
 
-        let text = <p className="game-info">Lượt tiếp theo : {nextSymbol}</p>;
+        let text = <p className="game-info">{turn}</p>;
 
         if (this.props.win) {
             text = <p className="game-info" style={{color: 'red'}}>Người thắng: {currentSymbol}</p>;
@@ -31,16 +29,6 @@ class OnlineGame extends React.Component {
             text = <p className="game-info">Hoà !</p>;
         }
         return text;
-    }
-
-    goBack() {
-        this.props.history.goBack();
-    }
-
-    handleClickRestartButton() {
-        this.props.resetBoard();
-
-        resetColor();
     }
 
     handleOnClickSquare(i, j) {
@@ -71,8 +59,8 @@ class OnlineGame extends React.Component {
                 <Button style={{width: 'fit-content', fontWeight: 'bold'}}
                         type="primary"
                         icon="caret-left"
-                        onClick={this.goBack}>
-                    Trang Chủ
+                        onClick={this.props.leaveRoom}>
+                    Thoát
                 </Button>
 
                 <div className="game">

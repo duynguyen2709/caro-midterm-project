@@ -3,6 +3,10 @@ const Firebase = require('../utilities/FirebaseUpload');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
+exports.getAllUser = async function(req,res){
+    userModel.getAllUser();
+};
+
 exports.registerUser = async function (req, res, next) {
     const user = req.body.user;
 

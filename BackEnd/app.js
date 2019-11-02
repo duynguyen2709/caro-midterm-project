@@ -11,14 +11,26 @@ const axios = require('axios');
 require('./authentication/passport');
 const app = express();
 
-// init MySQL Connection
+const sockIO = require('socket.io')();
+app.sockIO = sockIO;
+
+// sockIO.on('connection', function(socket){
+//     console.log('A client connection occurred!');
+// });
+// ############ init MySQL Connection ############
 const mysql = require('./utilities/mysql');
 (async () => {
     try {
         await mysql.initConnection();
+        console.log('### MySQL Connected ###');
     } catch (e) {
+        console.error('### MySQL Connection Failed :' + e);
+        process.exit();
     }
 })();
+
+// ########### init Redis Connection ############
+const redis = require('./utilities/redis');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,6 +55,12 @@ app.get('/status', (req, res) => {
     })
 });
 
+app.get('/', (req,res) => {
+    res.render('index', {
+        title: 'test'
+    });
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
@@ -60,3 +78,4 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+require('./utilities/socketio');

@@ -20,6 +20,10 @@ export const ActionConstant = {
     LOGOUT: "LOGOUT",
     UPDATE_INFO: "UPDATE_INFO",
     CHANGE_PASSWORD: "CHANGE_PASSWORD",
+
+    // ONLINE GAME
+    JOIN_NEW_GAME: "JOIN_NEW_GAME",
+    LEAVE_ROOM: "LEAVE_ROOM",
 };
 
 export const SYSTEM_ERROR = "Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau";

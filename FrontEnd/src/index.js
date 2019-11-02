@@ -8,13 +8,15 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 import rootReducer from './reducers/RootReducer';
 import apiReducer from './reducers/ApiReducer';
+import onlineGameReducer from './reducers/OnlineGameReducer';
 
 import './index.css';
 import AppWrapper from "./utils/AppWrapper";
 
 const reducers = combineReducers({
     root: rootReducer,
-    api: apiReducer
+    api: apiReducer,
+    online: onlineGameReducer
 });
 
 if (process.env.NODE_ENV !== 'production') {

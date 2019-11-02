@@ -1,0 +1,47 @@
+const redis = require('../utilities/redis');
+
+module.exports.findPlayer = (io, socket, data) => {
+    if (!data){
+        console.error('Null Player Object');
+        return;
+    }
+
+    return redis.get("ROOM", (err, rawRoom) => {
+
+        if (rawRoom) {
+            const roomEntity = JSON.parse(rawRoom);
+            socket.join(roomEntity.roomID);
+
+            socket.to(roomEntity.roomID).emit('newGame',{
+                roomID: roomEntity.roomID,
+                player1: roomEntity.player1,
+                player2: data,
+                isPlayer1: true
+            });
+
+            socket.emit('newGame',{
+                roomID: roomEntity.roomID,
+                player1: roomEntity.player1,
+                player2: data,
+                isPlayer1: false
+            });
+
+            redis.del("ROOM");
+
+        } else {
+            const roomID = new Date().getTime();
+            const newRoom = {
+                roomID: roomID,
+                player1: data,
+            };
+            socket.join(roomID);
+            redis.set("ROOM", JSON.stringify(newRoom));
+        }
+    })
+};
+
+module.exports.kickRoom = (io, socket, data) => {
+    socket.leave(data, null);
+    socket.to(data).emit('kickRoom','');
+    //io.in(data).emit('kickRoom','');
+};

@@ -12,6 +12,7 @@
     "jsx-a11y/click-events-have-key-events" : "off",
     "jsx-a11y/no-static-element-interactions" : "off",
     "react/destructuring-assignment": "off",
+    "react/jsx-props-no-spreading": "off",
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
     "import/imports-first": ["error", "absolute-first"],
