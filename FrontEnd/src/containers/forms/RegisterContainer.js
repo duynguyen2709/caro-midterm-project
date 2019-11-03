@@ -27,7 +27,6 @@ function RegisterContainer(props) {
                          isLoading={props.isLoading}
                          onClickRegister={validateInfo}/>
 }
-RegisterContainer.whyDidYouRender = true;
 
 function mapStateToProps(state) {
     return {

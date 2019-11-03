@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import './Message.css';
 
-export default function Message(props) {
+const Message = React.memo((props) => {
     const {
         data,
         isMine,
@@ -25,4 +25,13 @@ export default function Message(props) {
             </div>
         </div>
     );
-}
+}, (prevProps, nextProps) => {
+    return (prevProps.isMine === nextProps.isMine &&
+        prevProps.startsSequence === nextProps.startsSequence &&
+        prevProps.endsSequence === nextProps.endsSequence &&
+        prevProps.data.timestamp === nextProps.prevProps.data.timestamp &&
+        prevProps.data.message === nextProps.prevProps.data.message &&
+        prevProps.data.username === nextProps.prevProps.data.username);
+});
+
+export default Message;

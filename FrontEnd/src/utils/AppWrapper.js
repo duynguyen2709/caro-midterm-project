@@ -5,6 +5,7 @@ import Error from "../components/utils/Error";
 import MainRoute from "../routers/MainRoute";
 
 export default class AppWrapper extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {

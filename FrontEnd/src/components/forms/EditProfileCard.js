@@ -34,5 +34,5 @@ const EditProfileCard = React.memo(({errorText, user, onClickCancel}) => {
 
     </Card>)
 });
-EditProfileCard.whyDidYouRender = true;
+
 export default EditProfileCard;

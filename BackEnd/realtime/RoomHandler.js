@@ -2,7 +2,7 @@ const redis = require('../utilities/redis');
 const GameHandler = require('./GameHandler');
 
 module.exports.findPlayer = (io, socket, data) => {
-    if (!data){
+    if (!data) {
         console.error('Null Player Object');
         return;
     }
@@ -14,7 +14,7 @@ module.exports.findPlayer = (io, socket, data) => {
 
             //if other player disconnected
             if (io.sockets.connected[roomEntity.socketID] == null ||
-                !io.sockets.connected[roomEntity.socketID].connected){
+                !io.sockets.connected[roomEntity.socketID].connected) {
                 const roomID = new Date().getTime();
                 const newRoom = {
                     roomID: roomID,
@@ -27,14 +27,14 @@ module.exports.findPlayer = (io, socket, data) => {
             }
             socket.join(roomEntity.roomID);
 
-            socket.to(roomEntity.roomID).emit('newGame',{
+            socket.to(roomEntity.roomID).emit('newGame', {
                 roomID: roomEntity.roomID,
                 player1: roomEntity.player1,
                 player2: data,
                 isPlayer1: true
             });
 
-            socket.emit('newGame',{
+            socket.emit('newGame', {
                 roomID: roomEntity.roomID,
                 player1: roomEntity.player1,
                 player2: data,
@@ -61,5 +61,5 @@ module.exports.findPlayer = (io, socket, data) => {
 
 module.exports.kickRoom = (io, socket, data) => {
     socket.leave(data, null);
-    socket.to(data).emit('kickRoom','');
+    socket.to(data).emit('kickRoom', '');
 };

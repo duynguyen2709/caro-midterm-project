@@ -3,7 +3,7 @@ const Firebase = require('../utilities/FirebaseUpload');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
-exports.getAllUser = async function(req,res){
+exports.getAllUser = async function (req, res) {
     userModel.getAllUser();
 };
 
@@ -119,7 +119,7 @@ exports.updateUserInfo = function (req, res, next) {
         let avatar = req.body.avatar;
         const {username, email, fullName} = req.body;
         const newAvatarFile = req.files[0];
-
+        
         if (newAvatarFile) {
             try {
                 avatar = await Firebase.UploadImageToStorage(newAvatarFile);

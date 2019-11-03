@@ -19,11 +19,6 @@ const reducers = combineReducers({
     online: onlineGameReducer
 });
 
-if (process.env.NODE_ENV !== 'production') {
-    // eslint-disable-next-line global-require
-    const whyDidYouRender = require('@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js');
-    whyDidYouRender(React, {exclude: [/^Switch/, /^Router/, /^Route/, /^Connect/] });
-}
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(<Provider store={store}>

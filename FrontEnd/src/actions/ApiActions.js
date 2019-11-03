@@ -147,15 +147,20 @@ export const updateUserInfo = (userData) => {
     return (dispatch) => {
         dispatch(editingStart());
 
+        const token = localStorage.getItem("token");
+
         return axios.post(`${process.env.REACT_APP_BACKEND_URL}user/update`,
             userData,
             {
+                headers: {"Authorization": `Bearer ${token}`},
                 timeout: 20000
             }).then(data => data.data)
             .then(data => {
                 if (data.returnCode === 1) {
                     return dispatch(getUser());
                 }
+                // eslint-disable-next-line no-undef,no-alert
+                alert(data.message);
                 return dispatch(setErrorText(data.message));
             }).catch(() => dispatch(setErrorText(SYSTEM_ERROR)));
     }
@@ -165,6 +170,7 @@ export const changePassword = (password) => {
     return (dispatch, getState) => {
 
         const {username} = getState().api.user;
+        const token = localStorage.getItem("token");
 
         dispatch(editingStart());
 
@@ -172,6 +178,7 @@ export const changePassword = (password) => {
             username,
             password
         }, {
+            headers: {"Authorization": `Bearer ${token}`},
             timeout: 5000
         }).then(data => data.data)
             .then(data => {

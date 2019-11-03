@@ -1,7 +1,7 @@
 import {Button, Col, Row} from "antd";
 import React from 'react';
 
-const OnlineGameHeader = React.memo((props) => {
+const OnlineGameHeader = React.memo(({roomID, otherPlayerName, leaveRoom}) => {
     return (
         <>
             <Row type="flex" justify="start">
@@ -9,13 +9,13 @@ const OnlineGameHeader = React.memo((props) => {
                     <Button style={{width: 'fit-content', fontWeight: 'bold'}}
                             type="primary"
                             icon="caret-left"
-                            onClick={props.leaveRoom}>
+                            onClick={leaveRoom}>
                         Thoát
                     </Button>
                 </Col>
                 <Col span={6}>
-                    <h2><b>Mã phòng:</b> {props.roomID}</h2>
-                    <h2><b>Đối thủ:</b> {props.otherPlayerName}</h2>
+                    <h2><b>Mã phòng:</b> {roomID}</h2>
+                    <h2><b>Đối thủ:</b> {otherPlayerName}</h2>
                 </Col>
 
             </Row>

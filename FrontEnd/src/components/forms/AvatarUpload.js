@@ -41,5 +41,5 @@ const AvatarUpload = React.memo(({setAvatar, setFile}) => {
         </>
     );
 });
-AvatarUpload.whyDidYouRender = true;
+
 export default AvatarUpload;

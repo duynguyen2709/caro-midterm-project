@@ -53,5 +53,5 @@ const PlayButtons = React.memo(() => {
         </Button>
     </>)
 });
-PlayButtons.whyDidYouRender = true;
+
 export default PlayButtons;

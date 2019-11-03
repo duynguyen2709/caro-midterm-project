@@ -195,7 +195,6 @@ class OnlineGameContainer extends React.Component {
         })
     }
 
-
     render() {
 
         const {findingPlayer} = this.state;
@@ -226,7 +225,8 @@ function mapStateToProps(state) {
         totalChecked: state.online.totalChecked,
         win: state.online.win,
         winPlayer: state.online.winPlayer,
-        mySymbol: state.online.mySymbol
+        mySymbol: state.online.mySymbol,
+        otherPlayer: state.online.otherPlayer,
     };
 }
 

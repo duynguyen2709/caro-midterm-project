@@ -3,8 +3,6 @@ import moment from 'moment';
 import $ from 'jquery';
 import Message from '../Message';
 
-import './MessageList.css';
-
 export default function MessageList(props) {
     const {messages} = props;
 
@@ -71,7 +69,7 @@ export default function MessageList(props) {
     };
 
     return (
-        <div className="message-list-container">
+        <div style={{padding: '10px 10px 70px'}}>
             {renderMessages()}
         </div>
     );

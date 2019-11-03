@@ -9,10 +9,8 @@ const initialState = {
     isMyTurn: true,
     isPlayer1: true,
     totalChecked: 0,
-
     win: false,
     winPlayer: '',
-
     messages: []
 };
 
@@ -29,9 +27,6 @@ export default function onlineGameReducer(state = initialState, action) {
                 isMyTurn: action.room.isPlayer1,
                 isPlayer1: action.room.isPlayer1
             };
-
-        case ActionConstant.LEAVE_ROOM:
-            return initialState;
 
         case ActionConstant.NEW_TURN_PLAYED:
             return {
@@ -63,6 +58,9 @@ export default function onlineGameReducer(state = initialState, action) {
                 ...state,
                 messages: action.messages
             };
+
+        case ActionConstant.LEAVE_ROOM:
+            return initialState;
 
         default :
             return state;

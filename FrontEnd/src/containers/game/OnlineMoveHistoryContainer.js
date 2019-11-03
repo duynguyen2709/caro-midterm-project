@@ -9,8 +9,4 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OnlineMoveHistoryTable);
+export default connect(mapStateToProps, null)(OnlineMoveHistoryTable);

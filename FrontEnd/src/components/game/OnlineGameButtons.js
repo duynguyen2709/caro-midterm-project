@@ -43,4 +43,5 @@ const OnlineGameButtons = (props) => {
         </Row>
     </>)
 };
+
 export default OnlineGameButtons;

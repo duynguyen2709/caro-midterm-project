@@ -55,7 +55,7 @@ class OnlineGame extends React.Component {
 
                 <OnlineGameHeader leaveRoom={this.props.leaveRoom}
                                   roomID={this.props.roomID}
-                                  otherPlayerName="123"
+                                  otherPlayerName={this.props.otherPlayer.fullName}
                 />
 
                 <div className="game">

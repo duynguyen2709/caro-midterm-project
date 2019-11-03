@@ -17,7 +17,7 @@ const LoginPage = ({errorText, isLoading}) => {
         [dispatch, username, password]
     );
 
-    return <>
+    return (<>
         <Row type="flex" justify="center">
             <img alt="logo" src={`${process.env.PUBLIC_URL}logo.png`}
                  style={{
@@ -75,7 +75,7 @@ const LoginPage = ({errorText, isLoading}) => {
                 </Card>
             </Col>
         </Row>
-    </>
+    </>)
 };
-LoginPage.whyDidYouRender = true;
+
 export default LoginPage;

@@ -16,6 +16,8 @@ passport.deserializeUser(function (user, done) {
     done(null, user);
 });
 
+// ############################# LOCAL STRATEGY #############################
+
 passport.use(new LocalStrategy({
         usernameField: 'username',
         passwordField: 'password'
@@ -47,6 +49,8 @@ passport.use(new LocalStrategy({
     }
 ));
 
+// ############################# JWT STRATEGY #############################
+
 passport.use(new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
         secretOrKey: '1612145'
@@ -62,6 +66,8 @@ passport.use(new JWTStrategy({
             }).catch(() => next(null, jwtPayload));
     }
 ));
+
+// ############################# FACEBOOK STRATEGY #############################
 
 passport.use(new FacebookStrategy({
         clientID: '517742439047265',
@@ -111,6 +117,8 @@ passport.use(new FacebookStrategy({
             return cb(e);
         }
     }));
+
+// ############################# GOOGLE STRATEGY #############################
 
 passport.use(new GoogleStrategy({
         clientID: '197622007853-igd0nh3urokvapqjs8us0j4ara0lop53.apps.googleusercontent.com',

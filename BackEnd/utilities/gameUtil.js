@@ -281,4 +281,4 @@ module.exports.checkWinCondition = (squares, i, j) => {
     }
 
     return null;
-}
+};

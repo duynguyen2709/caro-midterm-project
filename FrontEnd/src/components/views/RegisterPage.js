@@ -110,5 +110,5 @@ const RegisterPage = ({errorText, isLoading, onClickRegister}) => {
         </Row>
     </>
 };
-RegisterPage.whyDidYouRender = true;
+
 export default RegisterPage;

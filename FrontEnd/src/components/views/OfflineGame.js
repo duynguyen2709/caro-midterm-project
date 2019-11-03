@@ -7,7 +7,6 @@ import MoveHistoryContainer from '../../containers/game/MoveHistoryContainer';
 import Board from '../game/Board';
 
 class OfflineGame extends React.Component {
-    static whyDidYouRender = true;
 
     constructor(props) {
         super(props);

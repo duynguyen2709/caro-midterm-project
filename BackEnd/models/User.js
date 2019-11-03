@@ -1,33 +1,6 @@
 const conn = require('../utilities/mysql');
 const bcrypt = require('bcryptjs');
 
-module.exports.getAllUser = async () => {
-    const [res, f] = await conn.getConnection()
-        .query('SELECT * FROM User')
-        .then(([rows, fields]) => {
-            return [rows, fields];
-        })
-        .catch(err => {
-            console.error(err.message);
-            return [null, null];
-        });
-
-    if (!res)
-        return null;
-
-    return res.map(c => {
-        return {
-            username: c.username,
-            password: c.password,
-            fullName: c.fullName,
-            email: c.email,
-            avatar: c.avatar,
-            facebookID: c.facebookID,
-            googleID: c.googleID
-        };
-    });
-};
-
 module.exports.getUser = async (username) => {
     const [res, f] = await conn.getConnection()
         .query('SELECT * FROM User WHERE username = ?', [username])
