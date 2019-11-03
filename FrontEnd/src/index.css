@@ -1,4 +1,9 @@
-html, body {margin: 0; height: 100%; overflow: hidden}
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
 
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
@@ -58,12 +63,12 @@ ol, ul {
   flex-direction: column;
   justify-content: flex-start;
   margin-left: 100px;
+  position: relative;
 }
 
 .game {
   display: flex;
   flex-direction: row;
-  overflow: hidden;
   margin-top: 30px;
 }
 
@@ -239,7 +244,7 @@ ol, ul {
 }
 
 .game-info-section {
-  margin-left: 50px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

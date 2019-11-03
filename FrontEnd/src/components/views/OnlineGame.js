@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../index.css';
+import {Col, Row} from "antd";
 import {isBoardFull} from '../../utils/GameCheckUtil';
 import Board from '../game/Board';
 import OnlineGameButtons from "../game/OnlineGameButtons";
@@ -52,31 +53,32 @@ class OnlineGame extends React.Component {
     render() {
         return (
             <div className="container">
-
                 <OnlineGameHeader leaveRoom={this.props.leaveRoom}
                                   roomID={this.props.roomID}
                                   otherPlayerName={this.props.otherPlayer.fullName}
                 />
 
-                <div className="game">
-                    <div className="game-board">
-                        <Board row={BASE_ROW}
-                               column={BASE_COL}
-                               squares={this.props.squares}
-                               handleOnClickSquare={this.handleOnClickSquare}/>
-                    </div>
+                <Row type="flex" justify="start">
+                    <Col>
+                        <div className="game-board">
+                            <Board row={BASE_ROW}
+                                   column={BASE_COL}
+                                   squares={this.props.squares}
+                                   handleOnClickSquare={this.handleOnClickSquare}/>
+                        </div>
+                    </Col>
+                    <Col offset={1}>
+                        <div className="game-info-section">
+                            {this.getStatus()}
 
-                    <div className="game-info-section">
-                        {this.getStatus()}
+                            <OnlineGameButtons onUndoClick={this.props.handleOnRequestUndo}
+                                               onDrawClick={this.props.handleOnRequestDraw}
+                                               onSurrenderClick={this.props.handleOnRequestSurrender}/>
 
-                        <OnlineGameButtons onUndoClick={this.props.handleOnRequestUndo}
-                                           onDrawClick={this.props.handleOnRequestDraw}
-                                           onSurrenderClick={this.props.handleOnRequestSurrender}
-                        />
-
-                        <TabsWrapper sendMessage={this.props.sendMessage}/>
-                    </div>
-                </div>
+                            <TabsWrapper sendMessage={this.props.sendMessage}/>
+                        </div>
+                    </Col>
+                </Row>
             </div>
         );
     }

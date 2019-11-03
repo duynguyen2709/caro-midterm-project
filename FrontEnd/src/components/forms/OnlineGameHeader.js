@@ -13,11 +13,10 @@ const OnlineGameHeader = React.memo(({roomID, otherPlayerName, leaveRoom}) => {
                         Thoát
                     </Button>
                 </Col>
-                <Col span={6}>
+                <Col>
                     <h2><b>Mã phòng:</b> {roomID}</h2>
                     <h2><b>Đối thủ:</b> {otherPlayerName}</h2>
                 </Col>
-
             </Row>
         </>
     );
