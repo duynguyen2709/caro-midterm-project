@@ -57,7 +57,6 @@ module.exports.playTurn = (io, data) => {
     })
 };
 
-
 module.exports.sendMessage = (io, data) => {
     return redis.get('MESSAGE_' + data.roomID, (err, raw) => {
         if (!raw || err) {
@@ -67,9 +66,84 @@ module.exports.sendMessage = (io, data) => {
 
         const messages = JSON.parse(raw);
         messages.push(data);
-        console.log(messages);
-
         redis.set('MESSAGE_' + data.roomID, JSON.stringify(messages));
         io.in(data.roomID).emit('newMessage', messages);
+    })
+};
+
+module.exports.handleUndo = (socket, data) => {
+    socket.to(data.roomID).emit('otherPlayerRequestUndo', '');
+};
+
+module.exports.handleReplyUndoRequest = (io, socket, data) => {
+    if (data.answer) {
+        return redis.get('GAME_' + data.roomID, (err, raw) => {
+            if (!raw || err) {
+                console.error('Null Game Data for room: ' + data.roomID);
+                return;
+            }
+
+            const gameState = JSON.parse(raw);
+            let length = gameState.historyMoves.length;
+
+            const currentSymbol = data.isPlayer1 ? 'O' : 'X';
+            gameState.historyMoves.pop();
+            gameState.historySquares.pop();
+
+            length = gameState.historyMoves.length;
+            if (length >= 1 && gameState.historyMoves[length - 1].symbol === currentSymbol) {
+                gameState.historySquares.pop();
+            }
+
+            length = gameState.historyMoves.length;
+            if (length >= 1)
+                gameState.squares = gameState.historySquares[length - 1];
+            else {
+                gameState.squares = Array(20).fill(Array(20).fill(null));
+            }
+            gameState.totalChecked = length;
+            gameState.isXNext = !data.isPlayer1;
+            gameState.win = false;
+
+            redis.set('GAME_' + data.roomID, JSON.stringify(gameState));
+            io.in(data.roomID).emit('resetTurn', gameState);
+        })
+    } else {
+        socket.to(data.roomID).emit('requestRejected', '');
+    }
+};
+
+module.exports.handleRequestDraw = (socket, data) => {
+    socket.to(data.roomID).emit('otherPlayerRequestDraw', '');
+};
+
+module.exports.handleReplyDrawRequest = (io, socket, data) => {
+    if (data.answer) {
+        const state = {
+            totalChecked: 400
+        };
+
+        io.in(data.roomID).emit('gameDraw', state);
+        redis.del('GAME_' + data.roomID);
+    } else {
+        socket.to(data.roomID).emit('requestRejected', '');
+    }
+};
+
+module.exports.handleSurrender = (io, socket, data) => {
+    return redis.get('GAME_' + data.roomID, (err, raw) => {
+        if (!raw || err) {
+            console.error('Null Game Data for room: ' + data.roomID);
+            return;
+        }
+        const gameState = JSON.parse(raw);
+
+        socket.to(data.roomID).emit('otherPlayerSurrender', '');
+
+        gameState.win = true;
+        gameState.winPlayer = (data.isPlayer1) ? 'O' : 'X';
+        io.in(data.roomID).emit('gameEnded', gameState);
+
+        redis.del('GAME_' + data.roomID);
     })
 };

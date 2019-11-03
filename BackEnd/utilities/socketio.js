@@ -20,40 +20,24 @@ sockIO.on('connection', function (socket) {
         GameHandler.sendMessage(sockIO, data);
     });
 
-    /**
-     * Connect the Player 2 to the room he requested. Show error if room full.
-     */
-    socket.on('joinGame', function (data) {
-        const room = sockIO.nsps['/'].adapter.rooms[data.room];
-        if (room && room.length === 1) {
-            socket.join(data.room);
-            socket.broadcast.to(data.room).emit('player1', {});
-            socket.emit('player2', {
-                name: data.name,
-                room: data.room
-            })
-        } else {
-            socket.emit('err', {
-                message: 'Sorry, The room is full!'
-            });
-        }
+    socket.on('requestUndo', function (data) {
+        GameHandler.handleUndo(socket, data);
     });
 
-    /**
-     * Handle the turn played by either player and notify the other.
-     */
-    socket.on('playTurn', function (data) {
-        socket.broadcast.to(data.room).emit('turnPlayed', {
-            tile: data.tile,
-            room: data.room
-        });
+    socket.on('replyUndoRequest', function (data) {
+        GameHandler.handleReplyUndoRequest(sockIO, socket, data);
     });
 
-    /**
-     * Notify the players about the victor.
-     */
-    socket.on('gameEnded', function (data) {
-        socket.broadcast.to(data.room).emit('gameEnd', data);
+    socket.on('requestDraw', function (data) {
+        GameHandler.handleRequestDraw(socket, data);
+    });
+
+    socket.on('replyDrawRequest', function (data) {
+        GameHandler.handleReplyDrawRequest(sockIO, socket, data);
+    });
+
+    socket.on('requestSurrender', function (data) {
+        GameHandler.handleSurrender(sockIO, socket, data);
     });
 });
 

@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import moment from 'moment';
+import $ from 'jquery';
 import Message from '../Message';
 
 import './MessageList.css';
 
 export default function MessageList(props) {
     const {messages} = props;
+
+    useEffect(() => {
+        $("#scrollable").scrollTop($("#scrollable")[0].scrollHeight);
+    }, [messages]);
 
     const renderMessages = () => {
         let i = 0;
@@ -62,8 +67,6 @@ export default function MessageList(props) {
             // Proceed to the next message.
             i += 1;
         }
-        console.log(tempMessages);
-
         return tempMessages;
     };
 

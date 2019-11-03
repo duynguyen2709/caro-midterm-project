@@ -6,6 +6,7 @@ import OnlineGameButtons from "../game/OnlineGameButtons";
 import TabsWrapper from "../game/TabsWrapper";
 import OnlineGameHeader from "../forms/OnlineGameHeader";
 import {BASE_COL, BASE_ROW} from "../../utils/Constants";
+import {ModalGameEnded} from "../utils/Modals";
 
 class OnlineGame extends React.Component {
 
@@ -22,7 +23,7 @@ class OnlineGame extends React.Component {
         let text = <p className="game-info">{turn}</p>;
 
         if (this.props.win) {
-            if (this.props.winPlayer === this.props.mySymbol){
+            if (this.props.winPlayer === this.props.mySymbol) {
                 text = <p className="game-info" style={{color: 'red'}}>Bạn Đã Thắng</p>;
             } else {
                 text = <p className="game-info" style={{color: 'red'}}>Bạn Đã Thua</p>;
@@ -35,9 +36,16 @@ class OnlineGame extends React.Component {
     }
 
     handleOnClickSquare(i, j) {
-        if (this.props.squares[i][j] != null || this.props.win || !this.props.isMyTurn) {
+
+        if (this.props.win || isBoardFull(this.props.totalChecked)) {
+            ModalGameEnded();
             return;
         }
+
+        if (this.props.squares[i][j] != null || !this.props.isMyTurn) {
+            return;
+        }
+
         this.props.onClickSquare(i, j);
     }
 
@@ -61,7 +69,10 @@ class OnlineGame extends React.Component {
                     <div className="game-info-section">
                         {this.getStatus()}
 
-                        <OnlineGameButtons/>
+                        <OnlineGameButtons onUndoClick={this.props.handleOnRequestUndo}
+                                           onDrawClick={this.props.handleOnRequestDraw}
+                                           onSurrenderClick={this.props.handleOnRequestSurrender}
+                        />
 
                         <TabsWrapper sendMessage={this.props.sendMessage}/>
                     </div>

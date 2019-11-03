@@ -29,6 +29,8 @@ export const ActionConstant = {
     LEAVE_ROOM: "LEAVE_ROOM",
     NEW_TURN_PLAYED: "NEW_TURN_PLAYED",
     NEW_MESSAGE: "NEW_MESSAGE",
+    GAME_ENDED: "GAME_ENDED",
+    GAME_DRAW: "GAME_DRAW",
 };
 
 export const SYSTEM_ERROR = "Hệ Thống Có Lỗi. Vui Lòng Thử Lại Sau";

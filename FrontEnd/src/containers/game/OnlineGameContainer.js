@@ -2,11 +2,26 @@ import {withRouter} from 'react-router-dom'
 import React from 'react';
 import {connect} from 'react-redux';
 import io from "socket.io-client";
+import {Modal} from 'antd';
 import OnlineGame from '../../components/views/OnlineGame';
 import FindingPlayer from "../../components/views/FindingPlayer";
-import {joinNewGame, leaveRoom, onNewTurnPlayed, onNewMessage} from "../../actions/OnlineGameActions";
-import {ModalOutRoom} from "../../components/utils/Modals";
-import {highlight} from "../../utils/GameCheckUtil";
+import {
+    joinNewGame,
+    leaveRoom,
+    onGameDraw,
+    onGameEnded,
+    onNewMessage,
+    onNewTurnPlayed
+} from "../../actions/OnlineGameActions";
+import {
+    ModalConfirmAction,
+    ModalGameEnded,
+    ModalOutRoom,
+    ModalRejected,
+    ModalWaiting,
+    ModalWin
+} from "../../components/utils/Modals";
+import {highlight, isBoardFull} from "../../utils/GameCheckUtil";
 
 class OnlineGameContainer extends React.Component {
 
@@ -21,6 +36,9 @@ class OnlineGameContainer extends React.Component {
         this.handleLeaveRoom = this.handleLeaveRoom.bind(this);
         this.handleOnClickSquare = this.handleOnClickSquare.bind(this);
         this.handleSendMessage = this.handleSendMessage.bind(this);
+        this.handleOnRequestUndo = this.handleOnRequestUndo.bind(this);
+        this.handleOnRequestDraw = this.handleOnRequestDraw.bind(this);
+        this.handleOnRequestSurrender = this.handleOnRequestSurrender.bind(this);
     }
 
     componentDidMount() {
@@ -50,12 +68,66 @@ class OnlineGameContainer extends React.Component {
             this.props.onNewTurnPlayed(data)
         });
 
+        this.socket.on('resetTurn', (data) => {
+            Modal.destroyAll();
+            this.props.onNewTurnPlayed(data);
+        });
+
         this.socket.on('newMessage', (data) => {
             this.props.onNewMessage(data);
-        })
+        });
+
+        this.socket.on('otherPlayerSurrender', () => {
+            ModalWin();
+        });
+
+        this.socket.on('gameEnded', (data) => {
+            this.props.onGameEnded(data);
+        });
+
+        this.socket.on('otherPlayerRequestUndo', () => {
+            ModalConfirmAction('Đối Thủ Muốn Xin Đi Lại', () => {
+                this.socket.emit('replyUndoRequest', {
+                    roomID: this.props.roomID,
+                    isPlayer1: this.props.isPlayer1,
+                    answer: true
+                })
+            }, () => {
+                this.socket.emit('replyUndoRequest', {
+                    roomID: this.props.roomID,
+                    answer: false
+                })
+            });
+        });
+
+        this.socket.on('otherPlayerRequestDraw', () => {
+            ModalConfirmAction('Đối Thủ Muốn Xin Hòa', () => {
+                this.socket.emit('replyDrawRequest', {
+                    roomID: this.props.roomID,
+                    answer: true
+                })
+            }, () => {
+                this.socket.emit('replyDrawRequest', {
+                    roomID: this.props.roomID,
+                    answer: false
+                })
+            });
+        });
+
+        this.socket.on('requestRejected', () => {
+            Modal.destroyAll();
+            ModalRejected();
+        });
+
+        this.socket.on('gameDraw', (data) => {
+            Modal.destroyAll();
+            this.props.onGameDraw(data)
+        });
     }
 
     componentWillUnmount() {
+        this.handleLeaveRoom();
+
         this.socket.close();
     }
 
@@ -84,6 +156,46 @@ class OnlineGameContainer extends React.Component {
         })
     }
 
+    handleOnRequestUndo() {
+        if (this.props.win || isBoardFull(this.props.totalChecked)) {
+            ModalGameEnded();
+            return;
+        }
+
+        if (this.props.totalChecked === 0)
+            return;
+
+        ModalWaiting();
+        this.socket.emit('requestUndo', {
+            roomID: this.props.roomID
+        })
+    }
+
+    handleOnRequestDraw() {
+        if (this.props.win || isBoardFull(this.props.totalChecked)) {
+            ModalGameEnded();
+            return;
+        }
+
+        ModalWaiting();
+        this.socket.emit('requestDraw', {
+            roomID: this.props.roomID
+        })
+    }
+
+    handleOnRequestSurrender() {
+        if (this.props.win || isBoardFull(this.props.totalChecked)) {
+            ModalGameEnded();
+            return;
+        }
+
+        this.socket.emit('requestSurrender', {
+            roomID: this.props.roomID,
+            isPlayer1: this.props.isPlayer1
+        })
+    }
+
+
     render() {
 
         const {findingPlayer} = this.state;
@@ -92,6 +204,9 @@ class OnlineGameContainer extends React.Component {
             return <FindingPlayer/>;
 
         return <OnlineGame {...this.props}
+                           handleOnRequestUndo={this.handleOnRequestUndo}
+                           handleOnRequestDraw={this.handleOnRequestDraw}
+                           handleOnRequestSurrender={this.handleOnRequestSurrender}
                            sendMessage={this.handleSendMessage}
                            onClickSquare={this.handleOnClickSquare}
                            leaveRoom={this.handleLeaveRoom}/>;
@@ -122,6 +237,8 @@ function mapDispatchToProps(dispatch) {
         leaveRoom: () => dispatch(leaveRoom()),
         onNewTurnPlayed: (data) => dispatch(onNewTurnPlayed(data)),
         onNewMessage: (data) => dispatch(onNewMessage(data)),
+        onGameEnded: (data) => dispatch(onGameEnded(data)),
+        onGameDraw: (data) => dispatch(onGameDraw(data)),
     };
 }
 

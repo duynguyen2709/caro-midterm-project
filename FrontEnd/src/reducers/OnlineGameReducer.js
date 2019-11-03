@@ -45,11 +45,25 @@ export default function onlineGameReducer(state = initialState, action) {
                 winPlayer: action.data.winPlayer,
             };
 
+        case ActionConstant.GAME_DRAW:
+            return {
+                ...state,
+                totalChecked: action.data.totalChecked
+            };
+
+        case ActionConstant.GAME_ENDED:
+            return {
+                ...state,
+                win: action.data.win,
+                winPlayer: action.data.winPlayer,
+            };
+
         case ActionConstant.NEW_MESSAGE:
             return {
                 ...state,
                 messages: action.messages
             };
+
         default :
             return state;
     }

@@ -26,3 +26,17 @@ export const onNewMessage = (messages) => {
         messages
     }
 };
+
+export const onGameEnded = (data) => {
+    return {
+        type: ActionConstant.GAME_ENDED,
+        data
+    }
+};
+
+export const onGameDraw = (data) => {
+    return {
+        type: ActionConstant.GAME_DRAW,
+        data
+    }
+};

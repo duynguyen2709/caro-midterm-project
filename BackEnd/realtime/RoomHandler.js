@@ -10,7 +10,21 @@ module.exports.findPlayer = (io, socket, data) => {
     return redis.get("ROOM", (err, rawRoom) => {
 
         if (rawRoom) {
-            const roomEntity = JSON.parse(rawRoom);
+            let roomEntity = JSON.parse(rawRoom);
+
+            //if other player disconnected
+            if (io.sockets.connected[roomEntity.socketID] == null ||
+                !io.sockets.connected[roomEntity.socketID].connected){
+                const roomID = new Date().getTime();
+                const newRoom = {
+                    roomID: roomID,
+                    player1: data,
+                    socketID: socket.id
+                };
+
+                socket.join(roomID);
+                roomEntity = newRoom;
+            }
             socket.join(roomEntity.roomID);
 
             socket.to(roomEntity.roomID).emit('newGame',{
@@ -36,7 +50,9 @@ module.exports.findPlayer = (io, socket, data) => {
             const newRoom = {
                 roomID: roomID,
                 player1: data,
+                socketID: socket.id
             };
+
             socket.join(roomID);
             redis.set("ROOM", JSON.stringify(newRoom));
         }
@@ -46,5 +62,4 @@ module.exports.findPlayer = (io, socket, data) => {
 module.exports.kickRoom = (io, socket, data) => {
     socket.leave(data, null);
     socket.to(data).emit('kickRoom','');
-    //io.in(data).emit('kickRoom','');
 };
