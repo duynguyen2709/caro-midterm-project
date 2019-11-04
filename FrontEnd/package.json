@@ -25,6 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "deploy": "pm2 start ./runserver.sh --name caro_frontend",
     "lint": "eslint"
   },
   "eslintConfig": {

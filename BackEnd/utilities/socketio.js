@@ -12,6 +12,10 @@ sockIO.on('connection', function (socket) {
         RoomHandler.kickRoom(sockIO, socket, data);
     });
 
+    socket.on('leaveRoomUnmount', function (data) {
+        RoomHandler.leaveRoomUnmount(sockIO, socket, data);
+    });
+
     socket.on('playTurn', function (data) {
         GameHandler.playTurn(sockIO, data);
     });

@@ -126,7 +126,8 @@ class OnlineGameContainer extends React.Component {
     }
 
     componentWillUnmount() {
-        this.handleLeaveRoom();
+        this.socket.emit('leaveRoomUnmount', this.props.roomID);
+        this.props.leaveRoom();
 
         this.socket.close();
     }
