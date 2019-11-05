@@ -62,7 +62,7 @@ module.exports.findPlayer = (io, socket, data) => {
                         isPlayer1: false
                     });
 
-                    GameHandler.initGame(roomEntity.roomID);
+                    GameHandler.initGame(roomValue.roomID);
                 }
                 delete roomEntity[roomValue.roomID];
             }
@@ -79,6 +79,7 @@ module.exports.kickRoom = (io, socket, data) => {
         if (rawRoom) {
             let roomEntity = JSON.parse(rawRoom);
             delete roomEntity[data];
+            redis.set("ROOM", JSON.stringify(roomEntity));
         }
     })
 };
@@ -90,6 +91,7 @@ module.exports.leaveRoomUnmount = (io, socket, data) => {
         if (rawRoom) {
             let roomEntity = JSON.parse(rawRoom);
             delete roomEntity[data];
+            redis.set("ROOM", JSON.stringify(roomEntity));
         }
     })
 };
