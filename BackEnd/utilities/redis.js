@@ -4,7 +4,7 @@ const client = redis.createClient();
 client.on('connect', function () {
     console.log('### Redis Connected ###');
 
-    client.del("ROOM");
+    client.set("ROOM", JSON.stringify({}));
 });
 
 client.on('error', function (err) {
