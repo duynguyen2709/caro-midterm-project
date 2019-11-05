@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../index.css';
 import {Col, Row} from "antd";
 import {isBoardFull} from '../../utils/GameCheckUtil';
 import Board from '../game/Board';
@@ -8,6 +7,7 @@ import TabsWrapper from "../game/TabsWrapper";
 import OnlineGameHeader from "../forms/OnlineGameHeader";
 import {BASE_COL, BASE_ROW} from "../../utils/Constants";
 import {ModalGameEnded} from "../utils/Modals";
+import '../../index.css';
 
 class OnlineGame extends React.Component {
 

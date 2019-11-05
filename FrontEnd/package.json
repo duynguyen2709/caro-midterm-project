@@ -2,6 +2,7 @@
   "name": "btcn02",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./caro",
   "dependencies": {
     "@welldone-software/why-did-you-render": "^3.3.8",
     "antd": "^3.24.1",
