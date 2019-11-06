@@ -31,6 +31,7 @@ class OnlineGameContainer extends React.Component {
             findingPlayer: true,
         };
 
+        this.isLoading = false;
         this.socket = io(process.env.REACT_APP_BACKEND_URL);
 
         this.handleLeaveRoom = this.handleLeaveRoom.bind(this);
@@ -65,12 +66,15 @@ class OnlineGameContainer extends React.Component {
             if (data.win) {
                 highlight(data.winArray, data.winPlayer);
             }
-            this.props.onNewTurnPlayed(data)
+            this.props.onNewTurnPlayed(data);
+            this.isLoading = false;
         });
 
         this.socket.on('resetTurn', (data) => {
             Modal.destroyAll();
             this.props.onNewTurnPlayed(data);
+
+            this.isLoading = false;
         });
 
         this.socket.on('newMessage', (data) => {
@@ -140,12 +144,18 @@ class OnlineGameContainer extends React.Component {
     }
 
     handleOnClickSquare(i, j) {
+        if (this.isLoading){
+            return;
+        }
+
         this.socket.emit('playTurn', {
             roomID: this.props.roomID,
             isPlayer1: this.props.isPlayer1,
             i,
             j,
-        })
+        });
+
+        this.isLoading = true;
     }
 
     handleSendMessage(message) {

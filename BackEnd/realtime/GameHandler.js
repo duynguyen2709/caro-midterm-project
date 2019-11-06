@@ -20,7 +20,13 @@ module.exports.initGame = (roomID) => {
 
 module.exports.playTurn = (io, data) => {
     return redis.get('GAME_' + data.roomID, (err, raw) => {
-        if (!raw || err) {
+        if (err){
+            console.error(err);
+            io.in(data.roomID).emit('kickRoom', '');
+            return;
+        }
+
+        if (!raw) {
             console.error('Null Game Data for room: ' + data.roomID);
             io.in(data.roomID).emit('kickRoom', '');
             return;
@@ -78,7 +84,12 @@ module.exports.handleUndo = (socket, data) => {
 module.exports.handleReplyUndoRequest = (io, socket, data) => {
     if (data.answer) {
         return redis.get('GAME_' + data.roomID, (err, raw) => {
-            if (!raw || err) {
+            if (err) {
+                console.error(err);
+                return;
+            }
+
+            if (!raw) {
                 console.error('Null Game Data for room: ' + data.roomID);
                 return;
             }
@@ -132,8 +143,15 @@ module.exports.handleReplyDrawRequest = (io, socket, data) => {
 
 module.exports.handleSurrender = (io, socket, data) => {
     return redis.get('GAME_' + data.roomID, (err, raw) => {
-        if (!raw || err) {
+        if (err){
+            console.error(err);
+            io.in(data.roomID).emit('kickRoom', '');
+            return;
+        }
+
+        if (!raw) {
             console.error('Null Game Data for room: ' + data.roomID);
+            io.in(data.roomID).emit('kickRoom', '');
             return;
         }
         const gameState = JSON.parse(raw);

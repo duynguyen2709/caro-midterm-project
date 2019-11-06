@@ -28,8 +28,9 @@ export default class AppWrapper extends React.Component {
             })
     }
 
-    // eslint-disable-next-line no-unused-vars
     componentDidCatch(error, errorInfo) {
+        console.error(error);
+        console.error(errorInfo);
         this.setState({
             isError: true,
             isLoading: false,
