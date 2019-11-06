@@ -104,9 +104,10 @@ module.exports.handleReplyUndoRequest = (io, socket, data) => {
             length = gameState.historyMoves.length;
             if (length >= 1 && gameState.historyMoves[length - 1].symbol === currentSymbol) {
                 gameState.historySquares.pop();
+                gameState.historyMoves.pop();
             }
 
-            length = gameState.historyMoves.length;
+            length = gameState.historySquares.length;
             if (length >= 1)
                 gameState.squares = gameState.historySquares[length - 1];
             else {
