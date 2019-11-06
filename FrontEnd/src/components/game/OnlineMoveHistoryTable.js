@@ -13,7 +13,7 @@ export default class OnlineMoveHistoryTable extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         const currentRow = this.props.totalChecked - 1;
         const rows = document.getElementsByClassName('ant-table-row');
-        if (rows == null || rows.length === 0)
+        if (rows == null || rows.length === 0 || this.props.totalChecked === 400)
             return;
 
         if (rows.length >= 9) {
@@ -24,7 +24,9 @@ export default class OnlineMoveHistoryTable extends React.Component {
             }));
         }
 
-        rows[currentRow].style.backgroundColor = '#ffb35f';
+        if (rows[currentRow] != null)
+            rows[currentRow].style.backgroundColor = '#ffb35f';
+
         for (let i = 0; i < rows.length; i++) {
             if (i !== currentRow &&
                 rows[i].style.backgroundColor.toString() !== 'rgb(252, 205, 142)') {
